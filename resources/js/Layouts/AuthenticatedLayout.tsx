@@ -1,128 +1,126 @@
-import { useState, PropsWithChildren, ReactNode } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-import { User } from '@/types';
+import {PropsWithChildren, Suspense, useEffect, useState} from 'react';
+import {IRootState} from '@/store';
+import {useDispatch, useSelector} from 'react-redux';
+import Sidebar from '@/Components/AppLayout/Sidebar';
+import Header from '@/Components/AppLayout/Header';
+import Setting from '@/Components/AppLayout/Setting';
+import {
+    toggleAnimation,
+    toggleLayout,
+    toggleLocale,
+    toggleMenu,
+    toggleNavbar,
+    toggleRTL,
+    toggleSemidark,
+    toggleSidebar,
+    toggleTheme
+} from '@/store/themeConfigSlice';
+import Footer from '@/Components/AppLayout/Footer';
+import Notification from "@/Components/Notification";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
-export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+export default function Authenticated({children}: PropsWithChildren) {
+    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
+    const dispatch = useDispatch();
+    const [showTopButton, setShowTopButton] = useState(false);
+    const [showLoader, setShowLoader] = useState(true);
+    useEffect(() => {
+        dispatch(toggleTheme(localStorage.getItem('theme') || themeConfig.theme));
+        dispatch(toggleMenu(localStorage.getItem('menu') || themeConfig.menu));
+        dispatch(toggleLayout(localStorage.getItem('layout') || themeConfig.layout));
+        dispatch(toggleRTL(localStorage.getItem('rtlClass') || themeConfig.rtlClass));
+        dispatch(toggleAnimation(localStorage.getItem('animation') || themeConfig.animation));
+        dispatch(toggleNavbar(localStorage.getItem('navbar') || themeConfig.navbar));
+        dispatch(toggleLocale(localStorage.getItem('i18nextLng') || themeConfig.locale));
+        dispatch(toggleSemidark(localStorage.getItem('semidark') || themeConfig.semidark));
+    }, [dispatch, themeConfig.theme, themeConfig.menu, themeConfig.layout, themeConfig.rtlClass, themeConfig.animation, themeConfig.navbar, themeConfig.locale, themeConfig.semidark]);
+    const goToTop = () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    };
+    const onScrollHandler = () => {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            setShowTopButton(true);
+        } else {
+            setShowTopButton(false);
+        }
+    };
 
+    useEffect(() => {
+        window.addEventListener('scroll', onScrollHandler);
+
+        const screenLoader = document.getElementsByClassName('screen_loader');
+        if (screenLoader?.length) {
+            screenLoader[0].classList.add('animate__fadeOut');
+            setTimeout(() => {
+                setShowLoader(false);
+            }, 200);
+        }
+
+        return () => {
+            window.removeEventListener('onscroll', onScrollHandler);
+        };
+    }, []);
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                                </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
-                            <div className="ms-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {user.name}
-
-                                                <svg
-                                                    className="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <div className="-me-2 flex items-center sm:hidden">
-                            <button
-                                onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
-                            >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+        <div
+            className={`${(themeConfig.sidebar && 'toggle-sidebar') || ''} ${themeConfig.menu} ${themeConfig.layout} ${
+                themeConfig.rtlClass
+            } main-section antialiased relative font-nunito text-sm font-normal`}
+        >
+            <div className='relative'>
+                {/* sidebar menu overlay */}
+                <div
+                    className={`${(!themeConfig.sidebar && 'hidden') || ''} fixed inset-0 bg-[black]/60 z-50 lg:hidden`}
+                    onClick={() => dispatch(toggleSidebar())}></div>
+                <div className='fixed bottom-6 ltr:right-6 rtl:left-6 z-50'>
+                    {showTopButton && (
+                        <button type='button'
+                                className='btn btn-outline-primary rounded-full p-2 animate-pulse bg-[#fafafa] dark:bg-[#060818] dark:hover:bg-primary'
+                                onClick={goToTop}>
+                            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4' fill='none' viewBox='0 0 24 24'
+                                 stroke='currentColor' strokeWidth='1.5'>
+                                <path strokeLinecap='round' strokeLinejoin='round' d='M8 7l4-4m0 0l4 4m-4-4v18'/>
+                            </svg>
+                        </button>
+                    )}
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
+                {/* BEGIN APP SETTING LAUNCHER */}
+                <Setting/>
+                {/* END APP SETTING LAUNCHER */}
 
-                    <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                        </div>
+                <div className={`${themeConfig.navbar} main-container text-black dark:text-white-dark min-h-screen`}>
+                    {/* BEGIN SIDEBAR */}
+                    <Sidebar/>
+                    {/* END SIDEBAR */}
 
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
+                    <div className='main-content flex flex-col min-h-screen'>
+                        {/* BEGIN TOP NAVBAR */}
+                        <Header/>
+                        {/* END TOP NAVBAR */}
+
+                        {/* BEGIN CONTENT AREA */}
+                        <Suspense>
+                            <PerfectScrollbar
+                                className="relative max-h-[780px] chat-conversation-box">
+                                <div className={`${themeConfig.animation} p-6 animate__animated`}>
+
+                                    {children}
+                                </div>
+                            </PerfectScrollbar>
+                        </Suspense>
+                        {/* END CONTENT AREA */}
+
+                        {/* BEGIN FOOTER */}
+                        <Footer/>
+                        {/* END FOOTER */}
+
+                        {/* BEGIN NOTIFICATION */}
+                        <Notification/>
+                        {/* END NOTIFICATION */}
                     </div>
                 </div>
-            </nav>
-
-            {header && (
-                <header className="bg-white dark:bg-gray-800 shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
-
-            <main>{children}</main>
+            </div>
         </div>
     );
 }

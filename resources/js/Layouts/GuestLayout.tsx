@@ -1,18 +1,66 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
-import { PropsWithChildren } from 'react';
+import {Link} from '@inertiajs/react';
+import {PropsWithChildren, useEffect, useState} from 'react';
+import {Footer} from "@/Components/Footer";
+import Header from "@/Components/Header";
 
-export default function Guest({ children }: PropsWithChildren) {
+export default function Guest({children}: PropsWithChildren) {
+    const [showLoader, setShowLoader] = useState(true);
+    const [showTopButton, setShowTopButton] = useState(false);
+
+    const goToTop = () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    };
+    const onScrollHandler = () => {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            setShowTopButton(true);
+        } else {
+            setShowTopButton(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScrollHandler);
+
+        const screenLoader = document.getElementsByClassName('screen_loader');
+        if (screenLoader?.length) {
+            screenLoader[0].classList.add('animate__fadeOut');
+            setTimeout(() => {
+                setShowLoader(false);
+            }, 200);
+        }
+
+        return () => {
+            window.removeEventListener('onscroll', onScrollHandler);
+        };
+    }, []);
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                </Link>
+        <div className={'w-full'}>
+            <div className="fixed inset-0 flex justify-center sm:px-8">
+                <div className="flex w-full max-w-7xl lg:px-8">
+                    <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-gray-900 dark:ring-zinc-300/20"/>
+                </div>
             </div>
-
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {children}
+            <div className="relative">
+                <Header/>
+                <main>
+                    <div className='fixed bottom-6 right-10 z-50'>
+                        {showTopButton && (
+                            <button type='button'
+                                    className='btn btn-outline-primary rounded-full p-2 animate-pulse bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-700'
+                                    onClick={goToTop}>
+                                <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-white' fill='none'
+                                     viewBox='0 0 24 24'
+                                     stroke='currentColor' strokeWidth='1.5'>
+                                    <path strokeLinecap='round' strokeLinejoin='round' d='M8 7l4-4m0 0l4 4m-4-4v18'/>
+                                </svg>
+                            </button>
+                        )}
+                    </div>
+                    {children}
+                </main>
+                <Footer/>
             </div>
         </div>
     );
