@@ -19,6 +19,12 @@ Route::get('/', function () {
         'articles' => Article::all()
     ]);
 })->name('welcome');
+Route::get('article_list', function () {
+    return Inertia::render('ArticleList',[
+        'articles' => Article::all()
+    ]);
+})->name('articles.article_list');
+
 Route::post('/markdown', fn() => Str::of(request('markdown'))->markdown())->name('markdown');
 Route::get('/about', fn() => Inertia::render('About'))->name('about');
 Route::get('/uses', function () {
@@ -40,6 +46,7 @@ Route::get('/uses', function () {
         'tools' => $grouped
     ]);
 })->name('uses');
+Route::get('articles/{article:slug}', [ArticleController::class, 'show'])->name('article.show');
 
 
 Route::middleware('auth')->prefix('session/admin/')->group(function () {
@@ -48,10 +55,6 @@ Route::middleware('auth')->prefix('session/admin/')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('dashboard', function () {
         // Retrieve counts for each entity
-        $articleCount = Article::count();
-        $toolCount = Tool::count();
-        $categoryCount = Categories::count();
-        $sectionCount = ToolsSection::count();
         $startOfMonth = Carbon::now()->startOfMonth();
 
         // Get the start of the previous month
@@ -105,7 +108,7 @@ Route::middleware('auth')->prefix('session/admin/')->group(function () {
                 'title' => 'Category',
                 'icon' => 'receipt', // Replace with actual icon logic
                 'total' => $category_lastMonthCount,
-                'value' => $tools_currentMonthCount,
+                'value' => $category_currentMonthCount,
                 'diff' => $categoryDiff,
             ],
             [

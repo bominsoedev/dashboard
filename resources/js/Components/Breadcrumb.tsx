@@ -1,9 +1,9 @@
 //@ts-nocheck
 import {Link} from "@inertiajs/react";
 
-const Breadcrumb = ({menu}: { menu: any }) => {
+const Breadcrumb = ({menu, className = ''}: { menu: any, className: any }) => {
     return (
-        <div className={'mb-3'}>
+        <div className={`mb-3 ${className}`}>
             <ol className="flex text-gray-500 font-semibold dark:text-white-dark">
                 <li>
                     <Link href={route('dashboard')} className="hover:text-gray-500/70 dark:hover:text-white-dark/70">
@@ -21,7 +21,7 @@ const Breadcrumb = ({menu}: { menu: any }) => {
                     </Link>
                 </li>
                 {
-                    menu.map((data: any,index:any) => {
+                    menu.map((data: any, index: any) => {
                         return (
                             <li key={index} className="before:content-['/'] before:px-1.5">
                                 <Link

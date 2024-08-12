@@ -1,13 +1,33 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import {Link} from '@inertiajs/react';
 import {PropsWithChildren, useEffect, useState} from 'react';
 import {Footer} from "@/Components/Footer";
 import Header from "@/Components/Header";
+import {useDispatch, useSelector} from "react-redux";
+import {IRootState} from "@/store";
+import {
+    toggleAnimation,
+    toggleLayout, toggleLocale,
+    toggleMenu,
+    toggleNavbar,
+    toggleRTL, toggleSemidark,
+    toggleTheme
+} from "@/store/themeConfigSlice";
 
 export default function Guest({children}: PropsWithChildren) {
-    const [showLoader, setShowLoader] = useState(true);
-    const [showTopButton, setShowTopButton] = useState(false);
 
+    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
+    const dispatch = useDispatch();
+    const [showTopButton, setShowTopButton] = useState(false);
+    const [showLoader, setShowLoader] = useState(true);
+    useEffect(() => {
+        dispatch(toggleTheme(localStorage.getItem('theme') || themeConfig.theme));
+        dispatch(toggleMenu(localStorage.getItem('menu') || themeConfig.menu));
+        dispatch(toggleLayout(localStorage.getItem('layout') || themeConfig.layout));
+        dispatch(toggleRTL(localStorage.getItem('rtlClass') || themeConfig.rtlClass));
+        dispatch(toggleAnimation(localStorage.getItem('animation') || themeConfig.animation));
+        dispatch(toggleNavbar(localStorage.getItem('navbar') || themeConfig.navbar));
+        dispatch(toggleLocale(localStorage.getItem('i18nextLng') || themeConfig.locale));
+        dispatch(toggleSemidark(localStorage.getItem('semidark') || themeConfig.semidark));
+    }, [dispatch, themeConfig.theme, themeConfig.menu, themeConfig.layout, themeConfig.rtlClass, themeConfig.animation, themeConfig.navbar, themeConfig.locale, themeConfig.semidark]);
     const goToTop = () => {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;

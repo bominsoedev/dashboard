@@ -93,7 +93,7 @@ const MobileNavigation: React.FC = (props) => (
                     <nav className="mt-6">
                         <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
                             <MobileNavItem href="/about">About</MobileNavItem>
-                            <MobileNavItem href="/articles">Articles</MobileNavItem>
+                            <MobileNavItem href="/article_list">Articles</MobileNavItem>
                             <MobileNavItem href="/uses">Uses</MobileNavItem>
                         </ul>
                     </nav>
@@ -114,7 +114,7 @@ const DesktopNavigation: React.FC = (props) => (
         <ul className="flex rounded bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
             <NavLink href={route('welcome')} active={route().current('welcome')}>Home</NavLink>
             <NavLink href={route('about')} active={route().current('about')}>About</NavLink>
-            <NavLink href="" active={false}>Article</NavLink>
+            <NavLink href={route('articles.article_list')} active={route().current('articles.article_list')}>Article</NavLink>
             <NavLink href={route('uses')} active={route().current('uses')}>Uses</NavLink>
         </ul>
     </nav>

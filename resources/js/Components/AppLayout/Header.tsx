@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { IRootState } from '@/store';
 import { toggleRTL, toggleTheme, toggleSidebar } from '@/store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import Dropdown from '../Dropdown';
 import ModeToggle from "@/Components/ModeToggle";
 import Avatar from "@/Components/Avatar";
 import AvatarContainer from "@/Components/AvatarContainer";
+import {Link, usePage} from "@inertiajs/react";
 
 const Header = () => {
     const location = useLocation();
@@ -33,6 +34,8 @@ const Header = () => {
         }
     }, [location]);
 
+    const auth:any = usePage().props.auth;
+
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl';
 
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
@@ -41,68 +44,6 @@ const Header = () => {
     function createMarkup(messages: any) {
         return { __html: messages };
     }
-
-    const [messages, setMessages] = useState([
-        {
-            id: 1,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-success-light dark:bg-success text-success dark:text-success-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>',
-            title: 'Congratulations!',
-            message: 'Your OS has been updated.',
-            time: '1hr'
-        },
-        {
-            id: 2,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-info-light dark:bg-info text-info dark:text-info-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>',
-            title: 'Did you know?',
-            message: 'You can switch between artboards.',
-            time: '2hr'
-        },
-        {
-            id: 3,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-danger-light dark:bg-danger text-danger dark:text-danger-light"> <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>',
-            title: 'Something went wrong!',
-            message: 'Send Reposrt',
-            time: '2days'
-        },
-        {
-            id: 4,
-            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-warning-light dark:bg-warning text-warning dark:text-warning-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">    <circle cx="12" cy="12" r="10"></circle>    <line x1="12" y1="8" x2="12" y2="12"></line>    <line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>',
-            title: 'Warning',
-            message: 'Your password strength is low.',
-            time: '5days'
-        }
-    ]);
-
-    const removeMessage = (value: number) => {
-        setMessages(messages.filter((user) => user.id !== value));
-    };
-
-    const [notifications, setNotifications] = useState([
-        {
-            id: 1,
-            profile: 'user-profile.jpeg',
-            message: '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
-            time: '45 min ago'
-        },
-        {
-            id: 2,
-            profile: 'profile-34.jpeg',
-            message: '<strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
-            time: '9h Ago'
-        },
-        {
-            id: 3,
-            profile: 'profile-16.jpeg',
-            message: '<strong class="text-sm mr-1">Anna Morgan</strong>Upload a file',
-            time: '9h Ago'
-        }
-    ]);
-
-    const removeNotification = (value: number) => {
-        setNotifications(notifications.filter((user) => user.id !== value));
-    };
-
-    const [search, setSearch] = useState(false);
 
     const setLocale = (flag: string) => {
         setFlag(flag);
@@ -121,7 +62,7 @@ const Header = () => {
             <div className='shadow-sm'>
                 <div className='relative bg-white flex w-full items-center px-5 py-2.5 dark:bg-black'>
                     <div className='horizontal-logo flex lg:hidden items-center ltr:mr-2 rtl:ml-2'>
-                        <Link to='/' className='main-logo flex items-center shrink-0'>
+                        <Link href={''} className='main-logo flex items-center shrink-0'>
                             <AvatarContainer>
                                 <Avatar/>
                             </AvatarContainer>
@@ -194,19 +135,19 @@ const Header = () => {
                                                  src='/assets/images/user-profile.jpeg' alt='userProfile' />
                                             <div className='ltr:pl-4 rtl:pr-4 truncate'>
                                                 <h4 className='text-base'>
-                                                    John Doe
+                                                    {auth.user.name}
                                                     <span
                                                         className='text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2'>Pro</span>
                                                 </h4>
                                                 <button type='button'
-                                                        className='text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white'>
-                                                    johndoe@gmail.com
+                                                        className='text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white text-xs'>
+                                                    {auth.user.email}
                                                 </button>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
-                                        <Link to='/users/profile' className='dark:hover:text-white'>
+                                        <Link href={'/session/admin/profile'} className='dark:hover:text-white'>
                                             <svg className='ltr:mr-2 rtl:ml-2 shrink-0' width='18' height='18'
                                                  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                                 <circle cx='12' cy='6' r='4' stroke='currentColor' strokeWidth='1.5' />
@@ -221,7 +162,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to='/apps/mailbox' className='dark:hover:text-white'>
+                                        <Link href='/apps/mailbox' className='dark:hover:text-white'>
                                             <svg className='ltr:mr-2 rtl:ml-2 shrink-0' width='18' height='18'
                                                  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                                 <path
@@ -241,7 +182,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to='/auth/boxed-lockscreen' className='dark:hover:text-white'>
+                                        <Link href='/auth/boxed-lockscreen' className='dark:hover:text-white'>
                                             <svg className='ltr:mr-2 rtl:ml-2 shrink-0' width='18' height='18'
                                                  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                                 <path
@@ -270,7 +211,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className='border-t border-white-light dark:border-white-light/10'>
-                                        <Link to='/auth/boxed-signin' className='text-danger !py-3'>
+                                        <Link href='/auth/boxed-signin' className='text-danger !py-3'>
                                             <svg className='ltr:mr-2 rtl:ml-2 rotate-90 shrink-0' width='18' height='18'
                                                  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                                 <path

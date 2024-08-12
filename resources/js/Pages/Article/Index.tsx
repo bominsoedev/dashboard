@@ -1,8 +1,8 @@
+//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, Link} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import Article from "@/Components/Article";
 import {Container} from "@/Components/Container";
 import React from "react";
 import {Button} from "@/Components/Button";

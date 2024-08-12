@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, useForm} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";

@@ -1,7 +1,8 @@
+//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, useForm} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
-import React, {ChangeEvent, FormEventHandler, useCallback, useEffect, useMemo, useState} from "react";
+import React, {FormEventHandler, useEffect, useState} from "react";
 import axios from "axios";
 import {Field, Label, Select} from "@headlessui/react";
 import clsx from "clsx";
@@ -33,7 +34,7 @@ const Create = ({categories}: { categories: any }) => {
         return () => clearInterval(interval);
     }, [markdown]);
 
-    const content = (e) => {
+    const content = (e:any) => {
         setData('body', e.target.value)
         setMarkdown(e.target.value)
     }
@@ -112,7 +113,7 @@ const Create = ({categories}: { categories: any }) => {
                     </title>
                 </Head>
                 <div className="items-center">
-                    <Breadcrumb menu={menus}/>
+                    <Breadcrumb menu={menus} className={''}/>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="panel col-span-2">

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, useForm} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
@@ -18,7 +19,7 @@ const Index = ({toolSections}: { toolSections: any }) => {
             name: 'dashboard'
         }, {
             link: '',
-            name: 'ToolSections'
+            name: 'Tool Sections'
         },
     ];
     const [confirming, setConfirming] = useState(false);

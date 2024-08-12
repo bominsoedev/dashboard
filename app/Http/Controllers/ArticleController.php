@@ -94,7 +94,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return Inertia::render('Article',[
+            'article' => $article
+        ]);
     }
 
     /**

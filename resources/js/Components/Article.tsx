@@ -11,18 +11,20 @@ interface ArticleProps {
     };
 }
 
-const Article: React.FC<ArticleProps> = ({ article }) => {
+const Article: React.FC<ArticleProps> = ({article}) => {
     return (
-        <Card as="article">
-            <Card.Title href={`/articles/${article.slug}`}>
-                {article.title}
-            </Card.Title>
-            <Card.Eyebrow as="time" dateTime={article.created_at} decorate>
-                {formatDate(article.created_at)}
-            </Card.Eyebrow>
-            <Card.Description>{article.excerpt}</Card.Description>
-            <Card.Cta>Read article</Card.Cta>
-        </Card>
+        <>
+            <Card as="article">
+                <Card.Title href={`/articles/${article.slug}`}>
+                    {article.title}
+                </Card.Title>
+                <Card.Eyebrow as="time" dateTime={article.created_at} decorate>
+                    {formatDate(article.created_at)}
+                </Card.Eyebrow>
+                <Card.Description>{article.excerpt}</Card.Description>
+                <Card.Cta>Read article</Card.Cta>
+            </Card>
+        </>
     );
 };
 
