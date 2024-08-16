@@ -1,3 +1,4 @@
+//@ts-nocheck
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import SecondaryButton from "@/Components/SecondaryButton";

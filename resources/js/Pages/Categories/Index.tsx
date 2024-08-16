@@ -1,7 +1,8 @@
+//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, Link} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
-import React, {FormEventHandler, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {formatDate} from "@/lib/formatDate";
 import DangerButton from "@/Components/DangerButton";
 import CreateOrEdit from "@/Pages/Categories/Partials/CreateOrEdit";

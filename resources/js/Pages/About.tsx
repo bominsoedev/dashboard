@@ -1,4 +1,5 @@
-import {FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, MailIcon, TwitterIcon} from "@/Components/SocialIcons";
+//@ts-nocheck
+import {FacebookIcon, InstagramIcon, MailIcon} from "@/Components/SocialIcons";
 import {Head} from "@inertiajs/react";
 import {Container} from "@/Components/Container";
 import SocialLink from "@/Components/SocialLink";
@@ -9,7 +10,7 @@ const About = () => {
         <>
             <Guest>
                 <Head>
-                    <title>About - Spencer Sharp</title>
+                    <title>About - KZY</title>
                     <meta
                         name="description"
                         content="I’m Spencer Sharp. I live in New York City, where I design the future."

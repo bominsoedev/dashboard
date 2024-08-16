@@ -22,19 +22,19 @@ function Article({article}: { article: any }) {
                 <Card.Description>{article.excerpt}</Card.Description>
                 <Card.Cta>Read article</Card.Cta>
             </Card>
-            <Card.Eyebrow
-                as="time"
-                dateTime={article.created_at}
-                className="mt-1 hidden md:block"
-            >
-                {formatDate(article.created_at)}
-                <div className="uppercase mt-1">
+                <Card.Eyebrow
+                    as="time"
+                    dateTime={article.created_at}
+                    className="mt-1 hidden md:block"
+                >
+                    {formatDate(article.created_at)}
+                    <div className="uppercase mt-1">
                     <span
                         className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-teal-600 ring-1 ring-inset ring-teal-500/10">
                         {article.category.name}
                     </span>
-                </div>
-            </Card.Eyebrow>
+                    </div>
+                </Card.Eyebrow>
         </article>
     )
 }

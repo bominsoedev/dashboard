@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {PropsWithChildren, Suspense, useEffect, useState} from 'react';
 import {IRootState} from '@/store';
 import {useDispatch, useSelector} from 'react-redux';

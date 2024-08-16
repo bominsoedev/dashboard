@@ -1,7 +1,7 @@
 //@ts-nocheck
 import {Link, Head} from '@inertiajs/react';
 import {Container} from '@/Components/Container';
-import {FacebookIcon, GitHubIcon, InstagramIcon, LinkedInIcon, TwitterIcon} from "@/Components/SocialIcons";
+import {InstagramIcon} from "@/Components/SocialIcons";
 import Guest from "@/Layouts/GuestLayout";
 import Photos from "@/Components/Photo";
 import {Button} from "@/Components/Button";

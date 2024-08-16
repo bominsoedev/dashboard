@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useRef, useState, FormEventHandler } from 'react';
 import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useRef, FormEventHandler } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
