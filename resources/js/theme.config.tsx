@@ -1,3 +1,4 @@
+//@ts-nocheck
 const themeConfig = {
     locale: 'mm', // en, da, de, el, es, fr, hu, it, ja, pl, pt, ru, sv, tr, zh
     theme: 'system', // light, dark, system

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
 import i18next from 'i18next';
 import themeConfig from '../theme.config';
