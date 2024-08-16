@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('welcome');
 Route::get('article_list', function () {
     return Inertia::render('ArticleList',[
-        'articles' => Article::all()
+        'articles' => Article::orderBy('id','desc')->get()
     ]);
 })->name('articles.article_list');
 
