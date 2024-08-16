@@ -10,6 +10,7 @@ import store from "@/store";
 import {Provider} from "react-redux";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import '@/i18n';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React from 'react';
 import Alpine from 'alpinejs'
 
@@ -27,14 +28,28 @@ createInertiaApp({
                 <React.StrictMode>
                     <Suspense>
                         <Provider store={store}>
-                            <App {...props} />
+                            <BrowserRouter>
+                                <Routes>
+                                    <Route path="*" element={<App {...props} />}/>
+                                </Routes>
+                            </BrowserRouter>
                         </Provider>
                     </Suspense>
                 </React.StrictMode>)
             return
         }
 
-        hydrateRoot(el, <App {...props} />);
+        hydrateRoot(el, <React.StrictMode>
+            <Suspense>
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="*" element={<App {...props} />}/>
+                        </Routes>
+                    </BrowserRouter>
+                </Provider>
+            </Suspense>
+        </React.StrictMode>);
     },
     progress: {
         color: '#4B5563',

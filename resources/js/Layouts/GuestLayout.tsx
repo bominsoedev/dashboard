@@ -3,7 +3,7 @@ import {PropsWithChildren, useEffect, useState} from 'react';
 import {Footer} from "@/Components/Footer";
 import Header from "@/Components/Header";
 import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "@/store";
+import store, {IRootState} from "@/store";
 import {
     toggleAnimation,
     toggleLayout, toggleLocale,
@@ -14,11 +14,11 @@ import {
 } from "@/store/themeConfigSlice";
 
 export default function Guest({children}: PropsWithChildren) {
-
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
-    const dispatch = useDispatch();
     const [showTopButton, setShowTopButton] = useState(false);
     const [showLoader, setShowLoader] = useState(true);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(toggleTheme(localStorage.getItem('theme') || themeConfig.theme));
         dispatch(toggleMenu(localStorage.getItem('menu') || themeConfig.menu));
@@ -79,7 +79,13 @@ export default function Guest({children}: PropsWithChildren) {
                             </button>
                         )}
                     </div>
-                    {children}
+                    <div
+                        className={`${(store.getState().themeConfig.sidebar && 'toggle-sidebar') || ''} ${themeConfig.menu} ${themeConfig.layout} ${
+                            themeConfig.rtlClass
+                        } antialiased relative font-nunito font-normal`}
+                    >
+                        {children}
+                    </div>
                 </main>
                 <Footer/>
             </div>

@@ -1,6 +1,6 @@
 //@ts-nocheck
 import {PropsWithChildren, Suspense, useEffect, useState} from 'react';
-import {IRootState} from '@/store';
+import store, {IRootState} from '@/store';
 import {useDispatch, useSelector} from 'react-redux';
 import Sidebar from '@/Components/AppLayout/Sidebar';
 import Header from '@/Components/AppLayout/Header';
@@ -64,7 +64,7 @@ export default function Authenticated({children}: PropsWithChildren) {
     }, []);
     return (
         <div
-            className={`${(themeConfig.sidebar && 'toggle-sidebar') || ''} ${themeConfig.menu} ${themeConfig.layout} ${
+            className={`${(store.getState().themeConfig.sidebar && 'toggle-sidebar') || ''} ${themeConfig.menu} ${themeConfig.layout} ${
                 themeConfig.rtlClass
             } main-section antialiased relative font-nunito text-sm font-normal`}
         >

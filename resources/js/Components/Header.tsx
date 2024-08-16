@@ -1,5 +1,5 @@
 //@ts-nocheck
-import {Fragment, useEffect, useRef} from 'react'
+import React, {Fragment, useEffect, useRef} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {Container} from "@/Components/Container";
 import {Link} from "@inertiajs/react";
@@ -102,13 +102,6 @@ const MobileNavigation: React.FC = (props) => (
         </Transition.Root>
     </Popover>
 )
-
-interface NavItemProps {
-    href: string;
-    children: React.ReactNode;
-}
-
-
 const DesktopNavigation: React.FC = (props) => (
     <nav {...props}>
         <ul className="flex rounded bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
@@ -286,7 +279,7 @@ const Header: React.FC = () => {
                             </div>
                             <div className="flex justify-end md:flex-1">
                                 <div className="pointer-events-auto">
-                                    {/*<ModeToggle />*/}
+                                    <ModeToggle />
                                 </div>
                             </div>
                         </div>
