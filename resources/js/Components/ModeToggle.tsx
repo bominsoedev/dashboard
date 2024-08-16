@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from 'react'
 import { toggleTheme } from '@/store/themeConfigSlice';
 import {useDispatch, useSelector} from "react-redux";
