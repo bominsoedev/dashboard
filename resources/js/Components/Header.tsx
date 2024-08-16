@@ -286,7 +286,7 @@ const Header: React.FC = () => {
                             </div>
                             <div className="flex justify-end md:flex-1">
                                 <div className="pointer-events-auto">
-                                    <ModeToggle />
+                                    {/*<ModeToggle />*/}
                                 </div>
                             </div>
                         </div>
