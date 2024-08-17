@@ -145,7 +145,7 @@ export default function Welcome({articles}: { articles: any }) {
                     <section
                         className="home-banner-main section flex w-full flex-1 flex-col mobile:px-4 lg:items-center pt-0">
                         <div
-                            className="container relative mx-auto flex w-full flex-1 flex-col items-center justify-center overflow-hidden px-8 py-10 md:px-12 lg:flex-row lg:gap-16 xl:mx-[-100px] xl:justify-around xl:gap-16 widescreen:px-15 border-t-white/10 border-l-white/5 border-r-white/5 border-x border-t"
+                            className="container relative mx-auto flex w-full flex-1 flex-col items-center justify-center overflow-hidden px-8 py-10 md:px-12 lg:flex-row lg:gap-16 xl:mx-[-100px] xl:justify-around xl:gap-16 widescreen:px-15 border-t-white/10 border-l-white/5 border-r-white/5 border-x border-t z-10"
                             style={{
                                 borderRadius: '24px',
                                 boxShadow: 'rgba(0, 0, 0, 0.5) 0px 0px 40px 0px',
@@ -204,7 +204,7 @@ export default function Welcome({articles}: { articles: any }) {
                             articles
                         </p>
                     </header>
-                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 bg-card-900">
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
                         {articles.map((article) => (
                             <Article key={article.slug} article={article}/>
                         ))}

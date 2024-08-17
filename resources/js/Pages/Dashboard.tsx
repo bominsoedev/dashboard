@@ -54,7 +54,7 @@ export default function Dashboard({data}: { data: any }) {
             <div className="items-center">
                 <Breadcrumb menu={menus} className={''}/>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 mb-6 text-white">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 mb-6 text-white mt-5">
                 {stats}
             </div>
         </AuthenticatedLayout>
