@@ -19,7 +19,7 @@ const Photos: React.FC = () => {
 
     return (
         <div className="relative z-10">
-            <div className="-my-4 w-full mx-auto flex justify-center gap-5 py-4 sm:gap-8">
+            <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
                 {images.map((image, imageIndex) => (
                     <div
                         key={imageIndex}

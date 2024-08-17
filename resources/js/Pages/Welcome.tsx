@@ -204,7 +204,7 @@ export default function Welcome({articles}: { articles: any }) {
                             articles
                         </p>
                     </header>
-                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-12">
                         {articles.map((article) => (
                             <Article key={article.slug} article={article}/>
                         ))}
