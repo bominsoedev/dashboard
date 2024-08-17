@@ -3,7 +3,7 @@ import {Link} from "@inertiajs/react";
 
 const Breadcrumb = ({menu, className = ''}: { menu: any, className: any }) => {
     return (
-        <div className={`mb-3 ${className}`}>
+        <div className={`${className}`}>
             <ol className="flex text-gray-500 font-semibold dark:text-white-dark">
                 <li>
                     <Link href={route('dashboard')} className="hover:text-gray-500/70 dark:hover:text-white-dark/70">

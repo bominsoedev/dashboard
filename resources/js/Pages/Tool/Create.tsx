@@ -59,10 +59,10 @@ const Create = ({sections}: { sections: any }) => {
                     </title>
                 </Head>
                 <div className="items-center">
-                    <Breadcrumb menu={menus}/>
+                    <Breadcrumb menu={menus} className={''}/>
                 </div>
-                <div className="grid grid-cols-1">
-                    <div className="panel">
+                <div className="panel grid grid-cols-1 mt-5">
+                    <div className="">
                         <form onSubmit={handleTool} encType={'multipart/form-data'} className="">
                             <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-2">
                                 <Field>

@@ -99,6 +99,6 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        dd($categories);
     }
 }

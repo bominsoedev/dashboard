@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function index()
     {
         return Inertia::render('Article/Index', [
-            'articles' => Article::all()
+            'articles' => Article::paginate(10)
         ]);
     }
 
@@ -100,6 +100,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Admin Display the specified resource.
+     */
+    public function admin_show(Article $article)
+    {
+        return Inertia::render('AdminArticle',[
+            'article' => $article
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Article $article)
@@ -120,6 +130,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('article.index')->with('success', 'Article deleted successfully.');
     }
 }

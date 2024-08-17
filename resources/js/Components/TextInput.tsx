@@ -27,7 +27,7 @@ export default forwardRef(function TextInput(
                     {...props}
                     type={type}
                     className={clsx(
-                        'mt-3 block w-full appearance-none outline-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:focus:border-primary '
+                        'block w-full appearance-none outline-none rounded border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:focus:border-primary '
                     ) + className}
                     ref={localRef}
                 />

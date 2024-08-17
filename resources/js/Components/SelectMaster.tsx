@@ -42,8 +42,8 @@ const SelectMaster: FC<SelectMasterProps> = ({ providers, selectedProviderId, on
 
     return (
         <Listbox value={selectedProviderId} onChange={onChange}>
-            <div className="relative mt-3">
-                <ListboxButton className="relative mt-3 block w-full appearance-none outline-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
+            <div className="relative">
+                <ListboxButton className="relative block w-full appearance-none outline-none rounded border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
           <span className="flex items-center">
             {/*{selectedProvider && <ProviderImage slug={selectedProvider.slug} />}*/}
               <span className="ml-3 block truncate">

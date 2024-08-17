@@ -1,8 +1,7 @@
-//@ts-nocheck
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import {Head, Link} from "@inertiajs/react";
+import {Head, Link, useForm} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
-import React, {useEffect, useState} from "react";
+import React, {FormEventHandler, useEffect, useState} from "react";
 import {formatDate} from "@/lib/formatDate";
 import DangerButton from "@/Components/DangerButton";
 import CreateOrEdit from "@/Pages/Categories/Partials/CreateOrEdit";
@@ -21,6 +20,25 @@ const Index = ({categories}: { categories: any }) => {
             name: 'Categories'
         },
     ];
+    const {
+        data,
+        setData,
+        delete: destroy,
+        processing,
+        reset,
+        errors,
+    } = useForm({
+        password: '',
+    });
+    const deleteCategory: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        destroy(route('categories.destroy-category'), {
+            preserveScroll: true,
+            preserveState: false,
+            onFinish: () => reset(),
+        });
+    };
     useEffect(() => {
         setFilteredItems(() => {
             return categories.data.filter((item: any) => {
@@ -34,8 +52,10 @@ const Index = ({categories}: { categories: any }) => {
                 <Head>
                     <title>Categories</title>
                 </Head>
-                <div className="flex justify-between items-center">
-                    <Breadcrumb menu={menus} className={'mb-0'}/>
+                <div className="flex justify-between items-center flex-wrap-reverse gap-4 p-4">
+                    <div className="flex items-center w-full sm:w-auto">
+                        <Breadcrumb menu={menus} className={''}/>
+                    </div>
                     <div className="flex gap-2">
                         <div className="relative">
                             <div className="flex sm:gap-5 gap-3">
@@ -59,11 +79,11 @@ const Index = ({categories}: { categories: any }) => {
                 </div>
                 <PerfectScrollbar
                     className="relative min-h-[650px] chat-conversation-box">
-                    <ul role="categories" className="">
-                        {filteredItems.length ? (
-                            <>
-                                {filteredItems.map((category: any) => {
-                                    return (
+                    {filteredItems.length ? (
+                        <>
+                            {filteredItems.map((category: any) => {
+                                return (
+                                    <ul role={category.categoryKey} className="">
                                         <div className="">
                                             <li
                                                 key={category.categoryKey}
@@ -75,7 +95,9 @@ const Index = ({categories}: { categories: any }) => {
                                                         <p className="text-sm font-semibold leading-6">Action</p>
                                                         <div className="flex gap-2">
                                                             <CreateOrEdit edit={true} category={category}/>
-                                                            <DangerButton>
+                                                            <DangerButton
+                                                                onClick={() => deleteCategory}
+                                                            >
                                                                 <>
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"
@@ -111,12 +133,14 @@ const Index = ({categories}: { categories: any }) => {
                                                 <div
                                                     className="col-span-1 lg:col-span-1 sm:flex sm:flex-col sm:items-start pl-3">
                                                     <div className="min-w-0  justify-start">
-                                                        <p className="text-sm font-semibold leading-6">Category Name</p>
+                                                        <p className="text-sm font-semibold leading-6">Category
+                                                            Name</p>
                                                         <span
                                                             className="mt-1 text-sm font-bold truncate leading-5 text-gray-500">
                                                     {category.name}
                                                 </span>
-                                                        <span className="ml-1 text-gray-400 text-xs dark:text-gray-500">
+                                                        <span
+                                                            className="ml-1 text-gray-400 text-xs dark:text-gray-500">
                                                     @{category.slug}
                                                 </span>
                                                     </div>
@@ -124,7 +148,8 @@ const Index = ({categories}: { categories: any }) => {
 
                                                 <div
                                                     className="hidden sm:flex sm:col-span-1 lg:col-span-1 sm:flex-col sm:items-start pl-3">
-                                                    <p className="text-sm font-semibold leading-6">Created Date</p>
+                                                    <p className="text-sm font-semibold leading-6">Created
+                                                        Date</p>
                                                     <p className="mt-1 text-sm font-bold truncate leading-5 text-gray-500">
                                                         <time dateTime={category.created_at}>
                                                             {formatDate(category.created_at)}
@@ -134,7 +159,8 @@ const Index = ({categories}: { categories: any }) => {
 
                                                 <div
                                                     className="hidden sm:flex sm:col-span-1 lg:col-span-1 sm:flex-col sm:items-start pl-3">
-                                                    <p className="text-sm font-semibold leading-6">Updated Date</p>
+                                                    <p className="text-sm font-semibold leading-6">Updated
+                                                        Date</p>
                                                     <p className="mt-1 text-sm font-bold truncate leading-5 text-gray-500">
                                                         <time dateTime={category.updated_at}>
                                                             {formatDate(category.updated_at)}
@@ -152,16 +178,16 @@ const Index = ({categories}: { categories: any }) => {
                                             </li>
 
                                         </div>
-                                    )
-                                })
-                                }
-                            </>
-                        ) : ''}
-                    </ul>
+                                    </ul>
+                                )
+                            })
+                            }
+                        </>
+                    ) : ''}
                 </PerfectScrollbar>
-                <div className="flex justify-between items-center p-5">
-                    <div className="sm:flex w-full space-x-3 rtl:space-x-reverse">
-                        <ul className="inline-flex items-center space-x-1 rtl:space-x-reverse mx-auto">
+                <div className={'mt-5'}>
+                    <div className="flex justify-center flex-col w-full">
+                        <ul className="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto mb-4">
                             {categories.links.map((link: any, index: any) => {
                                     return (
                                         <li key={index}>

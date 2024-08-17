@@ -29,6 +29,7 @@ const CreateOrEdit = ({edit = false, category = null}: { edit: boolean, category
 
         post(route('categories.create-category'), {
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => closeModal(),
             onFinish: () => reset(),
         });
@@ -40,6 +41,7 @@ const CreateOrEdit = ({edit = false, category = null}: { edit: boolean, category
             category
         }), {
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => closeModal(),
             onFinish: () => reset(),
         });

@@ -20,7 +20,7 @@ class ToolsSectionController extends Controller
     public function index()
     {
         return Inertia::render('ToolSection/Index', [
-            'toolSections' => ToolsSection::all()
+            'toolSections' => ToolsSection::paginate(10)
         ]);
     }
 

@@ -27,7 +27,7 @@ const Index = ({tools}: { tools: any }) => {
                     </title>
                 </Head>
                 <div className="flex justify-between items-center">
-                    <Breadcrumb menu={menus}/>
+                    <Breadcrumb menu={menus} className={''}/>
                     <Button href={'/session/admin/tools/create_tool'}>
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1}

@@ -15,13 +15,13 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome',[
+    return Inertia::render('Welcome', [
         'articles' => Article::all()
     ]);
 })->name('welcome');
 Route::get('article_list', function () {
-    return Inertia::render('ArticleList',[
-        'articles' => Article::orderBy('id','desc')->get()
+    return Inertia::render('ArticleList', [
+        'articles' => Article::orderBy('id', 'desc')->get()
     ]);
 })->name('articles.article_list');
 
@@ -128,6 +128,9 @@ Route::middleware('auth')->prefix('session/admin/')->group(function () {
     Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
     Route::get('articles/create_article', [ArticleController::class, 'create'])->name('article.create');
     Route::post('articles/create_article', [ArticleController::class, 'store'])->name('articles.create-article');
+    Route::get('articles/{article:slug}', [ArticleController::class, 'admin_show'])->name('article.admin_show');
+    Route::delete('articles/destroy_article/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy-article');
+
     //tools
     Route::get('tools', [ToolController::class, 'index'])->name('tool.index');
     Route::get('tools/create_tool', [ToolController::class, 'create'])->name('tool.create');
@@ -139,6 +142,8 @@ Route::middleware('auth')->prefix('session/admin/')->group(function () {
         [CategoriesController::class, 'store'])->name('categories.create-category');
     Route::post('categories/edit_category/{category}',
         [CategoriesController::class, 'update'])->name('categories.update-category');
+    Route::delete('categories/destroy_category/{category}',
+        [CategoriesController::class, 'destroy'])->name('categories.destroy-category');
 
     //categories
     Route::get('tool_sections/tool_section',
