@@ -12,7 +12,7 @@ interface CardProps extends React.HTMLProps<HTMLElement> {
 export function Card({as: Component = 'div', className, children, ...props}: CardProps) {
     return (
         <Component
-            className={clsx(className, 'group relative flex flex-col items-start')}
+            className={clsx(className, 'group relative flex flex-col items-start px-2')}
             {...props}
         >
             {children}

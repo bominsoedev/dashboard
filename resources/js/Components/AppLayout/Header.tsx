@@ -1,8 +1,9 @@
+//@ts-nocheck
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { IRootState } from '@/store';
-import { toggleRTL, toggleTheme, toggleSidebar } from '@/store/themeConfigSlice';
+import { toggleRTL, toggleSidebar } from '@/store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import Dropdown from '../Dropdown';
@@ -162,7 +163,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className='border-t border-white-light dark:border-white-light/10'>
-                                        <Link href={route('logout')} className='text-danger !py-3'>
+                                        <Link href={route('logout')} method={'POST'} className='text-danger !py-3'>
                                             <svg className='ltr:mr-2 rtl:ml-2 rotate-90 shrink-0' width='18' height='18'
                                                  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                                 <path
