@@ -9,7 +9,6 @@ import {Head} from "@inertiajs/react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 const Article = ({article}: { article: any }) => {
-    console.log(article)
     const [markdown, setMarkdown] = useState<string>(article.content);
     const [html, setHtml] = useState<string>('');
     const goBack = () => {

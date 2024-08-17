@@ -12,7 +12,7 @@ export function Footer() {
                             <div className="flex gap-3 text-sm font-medium text-zinc-800 dark:text-zinc-200">
                                 <NavLink href={route('welcome')} active={route().current('welcome')}>Home</NavLink>
                                 <NavLink href={route('about')} active={route().current('about')}>About</NavLink>
-                                <NavLink href="" active={false}>Articles</NavLink>
+                                <NavLink href={route('articles.article_list')} active={route().current('articles.article_list')}>Articles</NavLink>
                                 <NavLink href={route('uses')} active={route().current('uses')}>Uses</NavLink>
                             </div>
                             <p className="text-sm text-zinc-400 dark:text-zinc-500">

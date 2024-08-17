@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Container} from "@/Components/Container";
-import {ArrowLeftIcon} from "@heroicons/react/16/solid";
 import {formatDate} from "@/lib/formatDate";
-import {Prism as SyntaxHighlighter} from "react-syntax-highlighter"
-import {Head, usePage} from "@inertiajs/react";
-import Markdown from "react-markdown";
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
+import {Head} from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Breadcrumb from "@/Components/Breadcrumb";
 import PerfectScrollbar from "react-perfect-scrollbar";
