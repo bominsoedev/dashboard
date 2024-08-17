@@ -18,8 +18,8 @@ const Photos: React.FC = () => {
     const images = [image, image1, image2, image3, image4];
 
     return (
-        <div className="mt-16 sm:mt-20">
-            <div className="-my-4 w-full mx-auto flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+        <div className="">
+            <div className="-my-4 w-full mx-auto flex justify-center gap-5 py-4 sm:gap-8">
                 {images.map((image, imageIndex) => (
                     <div
                         key={imageIndex}

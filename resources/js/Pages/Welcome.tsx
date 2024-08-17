@@ -115,7 +115,7 @@ function Newsletter() {
     )
 }
 
-export default function Welcome({articles}:{articles:any}) {
+export default function Welcome({articles}: { articles: any }) {
     const handleImageError = () => {
         document.getElementById('screenshot-container')?.classList.add('!hidden');
         document.getElementById('docs-card')?.classList.add('!row-span-1');
@@ -136,6 +136,12 @@ export default function Welcome({articles}:{articles:any}) {
                     />
                 </Head>
                 <Container className={'mt-10'}>
+                    <header
+                        className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
+                        <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
+                            profile
+                        </p>
+                    </header>
                     <section
                         className="home-banner-main section flex w-full flex-1 flex-col mobile:px-4 lg:items-center pt-0">
                         <div
@@ -182,18 +188,26 @@ export default function Welcome({articles}:{articles:any}) {
                         </div>
                     </section>
                 </Container>
-                <Photos/>
-                <Container className="mt-24 md:mt-28">
+                <Container className="container mt-24 md:mt-28">
                     <header
-                        className="section-heading-secondary container relative mx-auto mb-20 flex items-center justify-between px-[30px] xl:px-0 text-white">
-                        <p className="inherits-color absolute right-0 z-10 hidden translate-y-2 font-kanit text-[80px] font-bold uppercase text-[#20365733] md:block">
+                        className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
+                        <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
+                        featured
+                        </p>
+                    </header>
+                </Container>
+                <Photos/>
+                <Container className="container mt-24 md:mt-28">
+                    <header
+                        className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
+                        <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
                             articles
                         </p>
                     </header>
-                    <div className="mx-auto grid grid-cols-1 gap-y-14 gap-10 lg:grid-cols-2">
-                            {articles.map((article) => (
-                                <Article key={article.slug} article={article} />
-                            ))}
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 bg-card-900">
+                        {articles.map((article) => (
+                            <Article key={article.slug} article={article}/>
+                        ))}
                     </div>
                 </Container>
 

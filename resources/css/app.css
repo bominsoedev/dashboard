@@ -823,6 +823,14 @@
     box-shadow: none;
     padding: 0.625rem;
 }
+.bg-card-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(20 25 36 / var(--tw-bg-opacity));
+}
+.text-card-500 {
+    --tw-text-opacity: 1;
+    color: rgb(41 51 74 / var(--tw-text-opacity));
+}
 
 .text-dark {
     --tw-text-opacity: 1;
