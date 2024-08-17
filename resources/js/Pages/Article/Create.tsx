@@ -115,7 +115,7 @@ const Create = ({categories}: { categories: any }) => {
                 <div className="items-center">
                     <Breadcrumb menu={menus} className={''}/>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="panel col-span-2">
                         <form onSubmit={handleArticle} encType={'multipart/form-data'} className="">
                             <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-2">
@@ -139,7 +139,7 @@ const Create = ({categories}: { categories: any }) => {
                             <Field className={'mt-3'}>
                                 <Label className="text-lg font-medium"> Featured Photo</Label>
                                 <div
-                                    className="mt-2 flex justify-center rounded-lg border-dashed border-2 border-gray-300 dark:border-gray-800 py-5">
+                                    className="mt-2 flex justify-center rounded border-dashed border-2 border-gray-300 dark:border-gray-800 py-5">
                                     {
                                         image == null ?
                                             <div className="text-center">
@@ -242,7 +242,7 @@ const Create = ({categories}: { categories: any }) => {
                             <textarea
                                 id="markdown"
                                 className={clsx(
-                                    'mt-3 block w-full h-[500px] outline-none resize-none rounded-lg border-none bg-gray-100 dark:bg-white/5 p-3 text-sm/6 text-gray-900 dark:text-white'
+                                    'mt-3 block w-full h-[400px] outline-none resize-none rounded border-none bg-gray-100 dark:bg-white/5 p-3 text-sm/6 text-gray-900 dark:text-white'
                                 )}
                                 value={data.body}
                                 placeholder={'Aa'}
@@ -260,14 +260,18 @@ const Create = ({categories}: { categories: any }) => {
                     </div>
                     <div className="panel">
                         <span className={'text-lg'}>Description Preview</span>
-                        <PerfectScrollbar
-                            className="relative max-h-[630px] chat-conversation-box">
-                            <div
-                                className="mt-3 block w-full outline-none resize-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
-                                <div id="html" className="dark:prose-invert prose "
-                                     dangerouslySetInnerHTML={{__html: html}}></div>
-                            </div>
-                        </PerfectScrollbar>
+                        {
+                            html && (
+                                <PerfectScrollbar
+                                    className="relative max-h-[630px] chat-conversation-box">
+                                    <div
+                                        className="mt-3 block w-full outline-none resize-none rounded border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
+                                        <div id="html" className="dark:prose-invert prose "
+                                             dangerouslySetInnerHTML={{__html: html}}></div>
+                                    </div>
+                                </PerfectScrollbar>
+                            )
+                        }
                     </div>
                 </div>
             </Authenticated>
