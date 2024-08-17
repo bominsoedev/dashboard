@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Article extends Model
@@ -26,12 +28,14 @@ class Article extends Model
         'excerpt',
         'content',
     ];
+
     public static function booted(): void
     {
         static::creating(function ($model) {
             $model->articleKey = Str::uuid();
         });
     }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -42,8 +46,8 @@ class Article extends Model
         return $this->belongsTo(Categories::class);
     }
 
-    public function attachment(): BelongsTo
+    public function attachment(): HasOne
     {
-        return $this->belongsTo(Attachment::class);
+        return $this->hasOne(Attachment::class);
     }
 }

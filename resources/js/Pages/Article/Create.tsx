@@ -60,7 +60,7 @@ const Create = ({categories}: { categories: any }) => {
                 setImageSrc(e.target.result);
             };
             reader.readAsDataURL(file);
-            data.attachments = file.name
+            setData('attachments', file)
             setImage(file);
             // Simulate upload progress
             setIsLoading(true);

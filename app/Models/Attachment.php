@@ -15,6 +15,7 @@ class Attachment extends Model
     protected $fillable = [
         'attachmentKey',
         'user_id',
+        'article_id',
         'image_name',
         'image_path',
         'image_location'
@@ -31,5 +32,4 @@ class Attachment extends Model
             $model->attachmentKey = Str::uuid();
         });
     }
-
 }

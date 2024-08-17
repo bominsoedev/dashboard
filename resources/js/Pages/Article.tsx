@@ -5,12 +5,11 @@ import Guest from "@/Layouts/GuestLayout";
 import {Container} from "@/Components/Container";
 import {ArrowLeftIcon} from "@heroicons/react/16/solid";
 import {formatDate} from "@/lib/formatDate";
-import {Prism as SyntaxHighlighter} from "react-syntax-highlighter"
 import {Head} from "@inertiajs/react";
-import Markdown from "react-markdown";
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 const Article = ({article}: { article: any }) => {
+    console.log(article)
     const [markdown, setMarkdown] = useState<string>(article.content);
     const [html, setHtml] = useState<string>('');
     const goBack = () => {
@@ -68,29 +67,21 @@ const Article = ({article}: { article: any }) => {
                                         </div>
                                     </time>
                                 </header>
-                                <Markdown
-                                    className={'mt-8 dark:prose-invert prose'}
-                                    children={markdown}
-                                    components={{
-                                        code(props) {
-                                            const {children, className, node, ...rest} = props
-                                            const match = /language-(\w+)/.exec(className || '')
-                                            return match ? (
-                                                <SyntaxHighlighter
-                                                    {...rest}
-                                                    PreTag="div"
-                                                    children={String(children).replace(/\n$/, '')}
-                                                    language={match[1]}
-                                                    style={dark}
-                                                />
-                                            ) : (
-                                                <code {...rest} className={className}>
-                                                    {children}
-                                                </code>
-                                            )
-                                        }
-                                    }}
-                                />
+                                <div className="max-w-xs px-2.5 lg:max-w-screen-lg my-5">
+                                    <img
+                                        src={`/${article.attachment.image_location}`}
+                                        alt="Feature Photo"
+                                        className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
+                                    />
+                                </div>
+                                <PerfectScrollbar
+                                    className="relative max-h-[630px] chat-conversation-box mt-5">
+                                    <div
+                                        className="mt-3 block w-full outline-none resize-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
+                                        <div id="html" className="dark:prose-invert prose"
+                                             dangerouslySetInnerHTML={{__html: html}}></div>
+                                    </div>
+                                </PerfectScrollbar>
                             </article>
                         </div>
                     </div>

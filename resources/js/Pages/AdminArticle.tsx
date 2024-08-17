@@ -54,8 +54,8 @@ const Article = ({article}: { article: any }) => {
                     <div className="xl:relative">
                         <div className="mx-auto">
                             <article>
-                                <header className="flex flex-col">
-                                    <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+                                <div className="flex flex-col">
+                                    <h1 className="mt-6 text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-3xl">
                                         {article.title}
                                     </h1>
                                     <time
@@ -73,7 +73,14 @@ const Article = ({article}: { article: any }) => {
                                             </span>
                                         </div>
                                     </time>
-                                </header>
+                                </div>
+                                <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
+                                    <img
+                                        src={`/${article.attachment.image_location}`}
+                                        alt="Feature Photo"
+                                        className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
+                                    />
+                                </div>
                                 <PerfectScrollbar
                                     className="relative max-h-[630px] chat-conversation-box mt-5">
                                     <div
