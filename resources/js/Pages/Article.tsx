@@ -67,13 +67,18 @@ const Article = ({article}: { article: any }) => {
                                         </div>
                                     </time>
                                 </header>
-                                <div className="max-w-xs px-2.5 lg:max-w-screen-lg my-5">
-                                    <img
-                                        src={`/${article.attachment.image_location}`}
-                                        alt="Feature Photo"
-                                        className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
-                                    />
-                                </div>
+                                {
+                                    article.attachment &&
+                                    (
+                                        <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
+                                            <img
+                                                src={`/${article.attachment.image_location}`}
+                                                alt="Feature Photo"
+                                                className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
+                                            />
+                                        </div>
+                                    )
+                                }
                                 <PerfectScrollbar
                                     className="relative max-h-[630px] chat-conversation-box mt-5">
                                     <div

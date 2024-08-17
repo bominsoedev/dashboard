@@ -74,18 +74,23 @@ const Article = ({article}: { article: any }) => {
                                         </div>
                                     </time>
                                 </div>
-                                <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
-                                    <img
-                                        src={`/${article.attachment.image_location}`}
-                                        alt="Feature Photo"
-                                        className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
-                                    />
-                                </div>
+                                {
+                                    article.attachment &&
+                                    (
+                                        <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
+                                            <img
+                                                src={`/${article.attachment.image_location}`}
+                                                alt="Feature Photo"
+                                                className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
+                                            />
+                                        </div>
+                                    )
+                                }
                                 <PerfectScrollbar
                                     className="relative max-h-[630px] chat-conversation-box mt-5">
                                     <div
                                         className="mt-3 block w-full outline-none resize-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
-                                        <div id="html" className="dark:prose-invert prose"
+                                    <div id="html" className="dark:prose-invert prose"
                                              dangerouslySetInnerHTML={{__html: html}}></div>
                                     </div>
                                 </PerfectScrollbar>
