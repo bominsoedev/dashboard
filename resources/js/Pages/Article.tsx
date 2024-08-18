@@ -69,11 +69,11 @@ const Article = ({article}: { article: any }) => {
                                 {
                                     article.attachment &&
                                     (
-                                        <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
+                                        <div className="my-5">
                                             <img
                                                 src={`/storage/${article.attachment.image_location}`}
                                                 alt="Feature Photo"
-                                                className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
+                                                className="aspect-square rounded w-full !max-h-[400px] text-gray-300 object-cover"
                                             />
                                         </div>
                                     )
