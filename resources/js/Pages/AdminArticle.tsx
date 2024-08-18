@@ -74,7 +74,7 @@ const Article = ({article}: { article: any }) => {
                                     (
                                         <div className="max-w-xs px-2.5 lg:max-w-screen-md my-5">
                                             <img
-                                                src={`/${article.attachment.image_location}`}
+                                                src={`/storage/${article.attachment.image_location}`}
                                                 alt="Feature Photo"
                                                 className="aspect-square rounded bg-zinc-100 object-cover dark:bg-zinc-800"
                                             />
