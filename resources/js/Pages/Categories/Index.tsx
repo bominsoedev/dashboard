@@ -52,10 +52,8 @@ const Index = ({categories}: { categories: any }) => {
                 <Head>
                     <title>Categories</title>
                 </Head>
-                <div className="flex justify-between items-center flex-wrap-reverse gap-4 p-4">
-                    <div className="flex items-center w-full sm:w-auto">
-                        <Breadcrumb menu={menus} className={''}/>
-                    </div>
+                <div className="flex justify-between items-center w-full sm:w-auto h-[20px]">
+                    <Breadcrumb menu={menus} className={''}/>
                     <div className="flex gap-2">
                         <div className="relative">
                             <div className="flex sm:gap-5 gap-3">

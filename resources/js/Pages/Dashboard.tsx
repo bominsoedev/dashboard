@@ -50,11 +50,15 @@ export default function Dashboard({data}: { data: any }) {
     });
     return (
         <AuthenticatedLayout>
-            <Head title="Dashboard"/>
-            <div className="items-center">
+            <Head>
+                <title>
+                    Dashboard
+                </title>
+            </Head>
+            <div className="flex justify-between items-center w-full sm:w-auto max-h-[20px]">
                 <Breadcrumb menu={menus} className={''}/>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 mb-6 text-white mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 text-white mt-5">
                 {stats}
             </div>
         </AuthenticatedLayout>

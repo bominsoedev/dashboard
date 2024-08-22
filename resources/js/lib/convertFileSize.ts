@@ -13,3 +13,4 @@ function formatBytes(bytes: number, decimals: number = 2): string {
 }
 
 export default formatBytes;
+

@@ -3,14 +3,10 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, Link} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import {Container} from "@/Components/Container";
 import React, {useEffect, useState} from "react";
 import {Button} from "@/Components/Button";
 import TextInput from "@/Components/TextInput";
-import CreateOrEdit from "@/Pages/Categories/Partials/CreateOrEdit";
-import DangerButton from "@/Components/DangerButton";
 import {formatDate} from "@/lib/formatDate";
-import {Inertia} from "@inertiajs/inertia";
 import Destroy from "@/Pages/Article/Partials/Destroy";
 
 const Index = ({articles}: { articles: any }) => {
@@ -41,37 +37,38 @@ const Index = ({articles}: { articles: any }) => {
                         Article
                     </title>
                 </Head>
-                <div className="flex justify-between items-center flex-wrap-reverse gap-4 p-4">
-                    <div className="flex items-center w-full sm:w-auto">
-                        <Breadcrumb menu={menus} className={''}/>
-                    </div>
-                    <div className="flex gap-2">
-                        <div className="relative">
-                            <div className="flex sm:gap-5 gap-3">
-                                <TextInput id={'search'} name={'search'}
-                                           placeholder={'Search'}
-                                           className={'ltr:pr-9 rtl:pl-9 mt-0'}
-                                           value={search} onChange={(e) => setSearch(e.target.value)}/>
-                                <div
-                                    className="absolute ltr:right-7 rtl:left-7 top-[7px] -translate-y-1/2">
-                                    <svg className="absolute text-slate-400 h-5 w-5" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path fillRule="evenodd"
-                                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                              clipRule="evenodd"/>
-                                    </svg>
+                <div className="flex justify-between items-center w-full sm:w-auto h-[20px]">
+                    <Breadcrumb menu={menus} className={''}/>
+                    <div className="flex items-center gap-4">
+                        <div className="flex gap-2">
+                            <div className="relative">
+                                <div className="flex sm:gap-5 gap-3">
+                                    <TextInput id={'search'} name={'search'}
+                                               placeholder={'Search'}
+                                               className={'ltr:pr-9 rtl:pl-9 mt-0'}
+                                               value={search} onChange={(e) => setSearch(e.target.value)}/>
+                                    <div
+                                        className="absolute ltr:right-7 rtl:left-7 top-[7px] -translate-y-1/2">
+                                        <svg className="absolute text-slate-400 h-5 w-5" viewBox="0 0 20 20"
+                                             fill="currentColor">
+                                            <path fillRule="evenodd"
+                                                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                  clipRule="evenodd"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
+                            <Button href={'/session/admin/articles/create_article'}>
+                                <>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         strokeWidth={1}
+                                         stroke="currentColor" className="size-4">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                                    </svg>
+                                    Add New Article
+                                </>
+                            </Button>
                         </div>
-                        <Button href={'/session/admin/articles/create_article'}>
-                            <>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1}
-                                     stroke="currentColor" className="size-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                                </svg>
-                                Add New Article
-                            </>
-                        </Button>
                     </div>
                 </div>
                 <PerfectScrollbar
@@ -79,7 +76,6 @@ const Index = ({articles}: { articles: any }) => {
                     {filteredItems.length ? (
                         <>
                             {filteredItems.map((article: any) => {
-                                console.log(article)
                                 return (
                                     <ul role={article.articles_sectionKey} className="">
                                         <div className="">
@@ -93,7 +89,8 @@ const Index = ({articles}: { articles: any }) => {
                                                         <p className="text-sm font-semibold leading-6 uppercase">Action</p>
                                                         <div className="flex gap-2">
                                                             <Destroy article={article}/>
-                                                            <Link className={'btn-warning uppercase rounded btn btn-sm'} href={`/session/admin/articles/${article.slug}`}>
+                                                            <Link className={'btn-warning uppercase rounded btn btn-sm'}
+                                                                  href={`/session/admin/articles/${article.slug}`}>
                                                                 SHOW
                                                             </Link>
                                                         </div>

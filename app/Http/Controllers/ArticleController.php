@@ -23,7 +23,7 @@ class ArticleController extends Controller
     public function index()
     {
         return Inertia::render('Article/Index', [
-            'articles' => Article::paginate(10)
+            'articles' => Article::orderBy('id', 'desc')->paginate(10)
         ]);
     }
 

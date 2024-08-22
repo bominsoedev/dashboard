@@ -5,19 +5,25 @@ import {Head} from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Breadcrumb from "@/Components/Breadcrumb";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import 'highlight.js/styles/github-dark.css';
+import hljs from "highlight.js";
+import markdownToHtml from "@/Components/MarkdownEditor"; // Choose your preferred Highlight.js theme
+
 
 const Article = ({article}: { article: any }) => {
     const [markdown, setMarkdown] = useState<string>(article.content);
     const [html, setHtml] = useState<string>('');
-    const goBack = () => {
-        window.history.back(); // Uses the browser's history to navigate back
-    };
-    const convert = () => {
+    useEffect(() => {
         axios.post('/markdown', {markdown})
             .then(response => {
                 setHtml(response.data);
+                setTimeout(() => {
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightElement(block as HTMLElement);
+                    });
+                }, 0);
             });
-    };
+    }, [markdown]);
     const menus = [
         {
             link: route('dashboard'),
@@ -32,10 +38,6 @@ const Article = ({article}: { article: any }) => {
             name: 'preview article'
         },
     ];
-    useEffect(() => {
-        const interval = setInterval(convert, 1000);
-        return () => clearInterval(interval);
-    }, [markdown]);
     return (
         <>
             <Authenticated>
@@ -69,26 +71,24 @@ const Article = ({article}: { article: any }) => {
                                         </div>
                                     </time>
                                 </div>
-                                {
-                                    article.attachment &&
-                                    (
-                                        <div className="my-5">
-                                            <img
-                                                src={`/storage/${article.attachment.image_location}`}
-                                                alt="Feature Photo"
-                                                className="aspect-square rounded w-full !max-h-[400px] text-gray-300 object-cover"
-                                            />
-                                        </div>
-                                    )
-                                }
-                                <PerfectScrollbar
-                                    className="relative max-h-[630px] chat-conversation-box mt-5">
-                                    <div
-                                        className="mt-3 block w-full outline-none resize-none rounded-lg border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
-                                        <div id="html" className="dark:prose-invert prose"
-                                             dangerouslySetInnerHTML={{__html: html}}></div>
-                                    </div>
-                                </PerfectScrollbar>
+                                <div className="max-w-6xl mx-auto">
+                                    {
+                                        article.attachment &&
+                                        (
+                                            <div className="my-5">
+                                                <img
+                                                    src={`/storage/${article.attachment.image_location}`}
+                                                    alt="Feature Photo"
+                                                    className="aspect-square rounded w-full !max-h-[400px] text-gray-300 object-cover"
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                    <PerfectScrollbar
+                                        className="relative min-w-full h-screen chat-conversation-box bg-gray-100 dark:bg-white/5 p-4 rounded prose dark:prose-invert"
+                                        dangerouslySetInnerHTML={{__html: markdownToHtml(html)}}>
+                                    </PerfectScrollbar>
+                                </div>
                             </article>
                         </div>
                     </div>
