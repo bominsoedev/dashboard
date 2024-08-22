@@ -20,7 +20,7 @@ class ToolController extends Controller
     public function index()
     {
         return Inertia::render('Tool/Index', [
-            'tools' => Tool::all()
+            'tools' => Tool::orderBy('id', 'desc')->paginate(10),
         ]);
     }
 

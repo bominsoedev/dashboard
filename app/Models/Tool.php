@@ -12,6 +12,8 @@ class Tool extends Model
     use HasFactory;
 
     protected $table = 'tools';
+
+    protected $with = ['section', 'user'];
     protected $fillable = [
         'toolKey',
         'user_id',
@@ -20,12 +22,14 @@ class Tool extends Model
         'tools_section_id',
         'content'
     ];
+
     public static function booted(): void
     {
         static::creating(function ($model) {
             $model->toolKey = Str::uuid();
         });
     }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -33,6 +37,6 @@ class Tool extends Model
 
     public function section(): BelongsTo
     {
-        return $this->belongsTo(ToolsSection::class,'tools_section_id','id');
+        return $this->belongsTo(ToolsSection::class, 'tools_section_id', 'id');
     }
 }

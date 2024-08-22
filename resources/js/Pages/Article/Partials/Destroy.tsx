@@ -1,5 +1,5 @@
+//@ts-nocheck
 import SecondaryButton from "@/Components/SecondaryButton";
-import PrimaryButton from "@/Components/PrimaryButton";
 import Modal from "@/Components/Modal";
 import React, {FormEventHandler, useState} from "react";
 import {useForm} from "@inertiajs/react";

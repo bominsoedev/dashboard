@@ -9,7 +9,6 @@ import {Head} from "@inertiajs/react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import 'highlight.js/styles/github-dark.css';
 import CopyToClipboard from "react-copy-to-clipboard";
-import PrimaryButton from "@/Components/PrimaryButton";
 import ReactDOMServer from "react-dom/server";
 import hljs from "highlight.js";
 

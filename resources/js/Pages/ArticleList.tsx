@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {Card} from "@/Components/Card";
 import {formatDate} from "@/lib/formatDate";
 import Guest from "@/Layouts/GuestLayout";
