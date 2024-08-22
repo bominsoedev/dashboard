@@ -8,9 +8,15 @@ import {RouteName} from 'ziggy-js';
 import React, {Suspense} from "react";
 import {Provider} from "react-redux";
 import store from "@/store";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import '@/i18n';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import Alpine from 'alpinejs'
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+Alpine.start()
+
+const appName = import.meta.env.VITE_APP_NAME || 'Photography';
 
 createServer((page) =>
     createInertiaApp({
