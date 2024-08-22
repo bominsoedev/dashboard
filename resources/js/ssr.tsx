@@ -1,10 +1,14 @@
 //@ts-nocheck
 import ReactDOMServer from 'react-dom/server';
-import { createInertiaApp } from '@inertiajs/react';
+import {createInertiaApp} from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { route } from '../../vendor/tightenco/ziggy';
-import { RouteName } from 'ziggy-js';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
+import {route} from '../../vendor/tightenco/ziggy';
+import {RouteName} from 'ziggy-js';
+import React, {Suspense} from "react";
+import {Provider} from "react-redux";
+import store from "@/store";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -14,7 +18,7 @@ createServer((page) =>
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
         resolve: (name) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
-        setup: ({ App, props }) => {
+        setup: ({App, props}) => {
             global.route<RouteName> = (name, params, absolute) =>
                 route(name, params as any, absolute, {
                     // @ts-expect-error
@@ -23,7 +27,17 @@ createServer((page) =>
                     location: new URL(page.props.ziggy.location),
                 });
 
-            return <App {...props} />;
+            return <React.StrictMode>
+                <Suspense>
+                    <Provider store={store}>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="*" element={<App {...props} />}/>
+                            </Routes>
+                        </BrowserRouter>
+                    </Provider>
+                </Suspense>
+            </React.StrictMode>;
         },
     })
 );
