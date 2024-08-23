@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {Head, useForm} from "@inertiajs/react";
 import Breadcrumb from "@/Components/Breadcrumb";
@@ -13,7 +13,6 @@ import SelectMaster from "@/Components/SelectMaster";
 import convertFileSize from "@/lib/convertFileSize";
 import {PhotoIcon} from "@heroicons/react/16/solid";
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github-dark.css';
 import Toggle from "@/Components/Toggle";
 import ReactDOMServer from "react-dom/server";
 import PerfectScrollbar from "react-perfect-scrollbar";
