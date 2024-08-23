@@ -101,7 +101,7 @@ const MobileNavigation: React.FC = (props) => (
                                 </label>
                             </div>
                             <div
-                                className="relative w-full max-w-xs flex items-center ring-1 ring-slate-900/10 shadow-sm p-2 text-slate-700 font-semibold dark:ring-0 dark:highlight-white/5 dark:text-slate-200">
+                                className="relative w-full max-w-xs flex items-center shadow-sm p-2 text-slate-700 font-semibold dark:highlight-white/5 dark:text-slate-200">
                                 <ModeToggle name={true}/>
                             </div>
                         </div>

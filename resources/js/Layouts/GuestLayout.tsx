@@ -60,7 +60,7 @@ export default function Guest({children}: PropsWithChildren) {
         <div className={'w-full'}>
             <div className="fixed inset-0 flex justify-center sm:px-8 bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900">
                 <div className="flex w-full max-w-7xl lg:px-8">
-                    <div className="w-full bg-white ring-1 dark:ring-zinc-300/20 ring-zinc-100 text-slate-500 dark:text-slate-400 dark:bg-slate-900 "/>
+                    <div className="w-full bg-white ring-1 dark:ring-slate-800 ring-zinc-100 text-slate-500 dark:text-slate-400 dark:bg-slate-900 "/>
                 </div>
             </div>
             <div className="absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">

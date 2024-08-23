@@ -28,7 +28,7 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
-            <Container className={'mt-24 md:mt-28 h-screen'}>
+            <Container className={'mt-24 md:mt-28'}>
                 <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20">
                     <div className="flex flex-col">
                         <form onSubmit={submit} className={'rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40'}>
