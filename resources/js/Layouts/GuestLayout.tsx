@@ -57,7 +57,12 @@ export default function Guest({children}: PropsWithChildren) {
         };
     }, []);
     return (
-        <>
+        <div className={'w-full'}>
+            <div className="fixed inset-0 flex justify-center sm:px-8 bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900">
+                <div className="flex w-full max-w-7xl lg:px-8">
+                    <div className="w-full bg-white ring-1 dark:ring-zinc-300/20 ring-zinc-100 text-slate-500 dark:text-slate-400 dark:bg-slate-900 "/>
+                </div>
+            </div>
             <div className="absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
                 <div className="w-[108rem] flex-none flex justify-end">
                     <picture>
@@ -70,9 +75,9 @@ export default function Guest({children}: PropsWithChildren) {
                              className="w-[90rem] flex-none max-w-none hidden dark:block" decoding="async"/></picture>
                 </div>
             </div>
-            <div>
-            <Header/>
-                <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
+            <div className={'relative'}>
+                <Header/>
+                <main>
                     <div className='fixed bottom-6 right-10 z-50'>
                         {showTopButton && (
                             <button type='button'
@@ -94,9 +99,9 @@ export default function Guest({children}: PropsWithChildren) {
                     >
                         {children}
                     </div>
-                </div>
+                </main>
                 <Footer/>
             </div>
-        </>
+        </div>
     );
 }
