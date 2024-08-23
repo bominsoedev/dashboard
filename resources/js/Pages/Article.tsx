@@ -7,7 +7,6 @@ import {ArrowLeftIcon} from "@heroicons/react/16/solid";
 import {formatDate} from "@/lib/formatDate";
 import {Head} from "@inertiajs/react";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import 'highlight.js/styles/github-dark.css';
 import ReactDOMServer from "react-dom/server";
 import hljs from "highlight.js";
 

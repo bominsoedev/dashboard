@@ -4,6 +4,8 @@
 
 @import 'react-perfect-scrollbar/dist/css/styles.css';
 
+@import "github-dark-custom.css";
+
 /* tippy css */
 @import 'tippy.css';
 

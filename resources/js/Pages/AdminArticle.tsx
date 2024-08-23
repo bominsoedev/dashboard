@@ -6,7 +6,6 @@ import {Head} from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Breadcrumb from "@/Components/Breadcrumb";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import 'highlight.js/styles/github-dark.css';
 import hljs from "highlight.js";
 import markdownToHtml from "@/Components/MarkdownEditor"; // Choose your preferred Highlight.js theme
 
