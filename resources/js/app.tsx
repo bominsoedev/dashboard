@@ -8,7 +8,7 @@ import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {Suspense} from "react";
 import store from "@/store";
 import {Provider} from "react-redux";
-import 'react-perfect-scrollbar/dist/css/styles.css';
+import 'react-perfect-scrollbar/dist/css/styles.min.css';
 import '@/i18n';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React from 'react';
