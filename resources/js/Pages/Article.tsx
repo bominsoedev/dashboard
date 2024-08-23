@@ -77,7 +77,7 @@ const Article = ({article}: { article: any }) => {
                                     }
                                 </div>
                             </div>
-                            <PerfectScrollbar
+                            <div
                                 className="relative min-w-full max-h-[300px] chat-conversation-box">
                             <pre className={'mt-0 rounded-t-none rounded-b-md p-0'}>
                                 <code
@@ -85,7 +85,7 @@ const Article = ({article}: { article: any }) => {
                                     dangerouslySetInnerHTML={{__html: code}}
                                 />
                             </pre>
-                            </PerfectScrollbar>
+                            </div>
                         </div>
                     </div>
                 );

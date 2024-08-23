@@ -5,7 +5,6 @@ import {formatDate} from "@/lib/formatDate";
 import {Head} from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Breadcrumb from "@/Components/Breadcrumb";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import hljs from "highlight.js";
 import markdownToHtml from "@/Components/MarkdownEditor"; // Choose your preferred Highlight.js theme
 
@@ -84,10 +83,10 @@ const Article = ({article}: { article: any }) => {
                                             </div>
                                         )
                                     }
-                                    <PerfectScrollbar
+                                    <div
                                         className="relative min-w-full h-screen chat-conversation-box bg-gray-100 dark:bg-white/5 p-4 rounded prose dark:prose-invert"
                                         dangerouslySetInnerHTML={{__html: markdownToHtml(html)}}>
-                                    </PerfectScrollbar>
+                                    </div>
                                 </div>
                             </article>
                         </div>

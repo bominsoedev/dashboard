@@ -1,4 +1,4 @@
-import PerfectScrollbar from "react-perfect-scrollbar";
+//@ts-nocheck
 import ReactDOMServer from "react-dom/server";
 import React, {useState} from "react";
 
@@ -63,7 +63,7 @@ const markdownToHtml = (markdown: string) => {
                                 }
                             </div>
                         </div>
-                        <PerfectScrollbar
+                        <div
                             className="relative min-w-full max-h-[300px] chat-conversation-box">
                             <pre className={'mt-0 rounded-t-none rounded-b-md p-0'}>
                                 <code
@@ -71,11 +71,10 @@ const markdownToHtml = (markdown: string) => {
                                     dangerouslySetInnerHTML={{__html: code}}
                                 />
                             </pre>
-                        </PerfectScrollbar>
+                        </div>
                     </div>
                 </div>
             );
-
             return ReactDOMServer.renderToString(codeBlock);
         }
     );
