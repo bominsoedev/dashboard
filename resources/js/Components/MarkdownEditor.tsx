@@ -1,4 +1,3 @@
-import CopyToClipboard from "react-copy-to-clipboard";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ReactDOMServer from "react-dom/server";
 import React, {useState} from "react";

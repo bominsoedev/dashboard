@@ -17,7 +17,6 @@ import 'highlight.js/styles/github-dark.css';
 import Toggle from "@/Components/Toggle";
 import ReactDOMServer from "react-dom/server";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import CopyToClipboard from 'react-copy-to-clipboard';
 
 
 const Create = ({categories}: { categories: any }) => {
