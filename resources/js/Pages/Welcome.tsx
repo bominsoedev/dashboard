@@ -86,35 +86,6 @@ const SocialLink: React.FC<SocialLinkProps> = ({icon: Icon, ...props}) => {
     );
 };
 
-function Newsletter() {
-    return (
-        <form
-            action="/thank-you"
-            className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-        >
-            <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                <MailIcon className="h-6 w-6 flex-none"/>
-                <span className="ml-3">Stay up to date</span>
-            </h2>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                Get notified when I publish something new, and unsubscribe at any time.
-            </p>
-            <div className="mt-6 flex">
-                <input
-                    type="email"
-                    placeholder="Email address"
-                    aria-label="Email address"
-                    required
-                    className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
-                />
-                <Button type="submit" className="ml-4 flex-none">
-                    Join
-                </Button>
-            </div>
-        </form>
-    )
-}
-
 export default function Welcome({articles}: { articles: any }) {
     const handleImageError = () => {
         document.getElementById('screenshot-container')?.classList.add('!hidden');
@@ -135,15 +106,29 @@ export default function Welcome({articles}: { articles: any }) {
                         content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
                     />
                 </Head>
-                <Container className={'mt-10'}>
-                    <header
-                        className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
-                        <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
-                            profile
-                        </p>
-                    </header>
+                <Container className={'relative max-w-8xl mx-auto pt-20 sm:pt-24 lg:pt-32'}>
                     <section
-                        className="home-banner-main section flex w-full flex-1 flex-col mobile:px-4 lg:items-center pt-0">
+                        className="flex w-full flex-1 flex-col mobile:px-4 lg:items-center pt-0">
+                        <header
+                            className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
+                            <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
+                                profile
+                            </p>
+                            <div
+                                className="absolute inset-0 bottom-10 bg-bottom bg-no-repeat bg-slate-50 dark:bg-[#0B1120] index_beams__yWcJT">
+                                <div
+                                    className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5"
+                                    style={{
+                                        width: '300px',
+                                        height: '200px',
+                                        backgroundSize: 'cover', // Ensure the image covers the entire area
+                                        backgroundPosition: 'center', // Center the background image
+                                        maskImage: 'linear-gradient(transparent, black)',
+                                        WebkitMaskImage: 'linear-gradient(transparent, black)', // For WebKit-based browsers like Safari
+                                    }}
+                                ></div>
+                            </div>
+                        </header>
                         <div
                             className="container relative mx-auto flex w-full flex-1 flex-col items-center justify-center overflow-hidden px-8 py-10 md:px-12 lg:flex-row lg:gap-16 xl:mx-[-100px] xl:justify-around xl:gap-16 widescreen:px-15 border-t-white/10 border-l-white/5 border-r-white/5 border-x border-t z-10"
                             style={{
@@ -159,7 +144,7 @@ export default function Welcome({articles}: { articles: any }) {
                             </div>
                             <div
                                 className="absolute rounded bottom-0 left-0 right-0 top-0 z-10 -ml-4 hidden overflow-hidden text-right lg:inline-block">
-                                <img src={'/Profile/profile.jpg'} className={'absolute w-full h-full object-cover'}
+                                <img src={'/Profile/profile.jpg'} className={'absolute w-full h-[500px] object-cover'}
                                      loading={'lazy'} alt=""/>
                                 <div className="scale-200 absolute inset-0"
                                      style={{backgroundImage: 'radial-gradient(circle at 2% 22%, rgba(2, 4, 7, 0), rgb(2, 4, 7) 90%)'}}></div>
@@ -192,7 +177,7 @@ export default function Welcome({articles}: { articles: any }) {
                     <header
                         className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
                         <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
-                        featured
+                            featured
                         </p>
                     </header>
                 </Container>
@@ -205,7 +190,7 @@ export default function Welcome({articles}: { articles: any }) {
                         </p>
                     </header>
                     <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-12">
-                        {articles.map((article) => (
+                        {articles.map((article: any) => (
                             <Article key={article.slug} article={article}/>
                         ))}
                     </div>

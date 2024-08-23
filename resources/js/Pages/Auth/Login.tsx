@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {FormEventHandler, useRef} from 'react';
+import React, {FormEventHandler} from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
@@ -8,12 +8,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import {Head, Link, useForm, usePage} from '@inertiajs/react';
 import {Container} from "@/Components/Container";
-import ReCAPTCHA from 'react-google-recaptcha';
-import {PageProps} from "@/types";
 
 export default function Login({status, canResetPassword}: { status?: string, canResetPassword: boolean }) {
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
-    const SITE_KEY = usePage<PageProps>().props.KEY;
     const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
         password: '',
@@ -82,11 +78,6 @@ export default function Login({status, canResetPassword}: { status?: string, can
 
                                 <InputError message={errors.password} className="mt-2"/>
                             </div>
-
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                sitekey={SITE_KEY.SITE_KEY}
-                            />
                             <div className="block mt-4">
                                 <label className="flex items-center">
                                     <Checkbox

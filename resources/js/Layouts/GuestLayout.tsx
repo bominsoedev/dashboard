@@ -57,15 +57,22 @@ export default function Guest({children}: PropsWithChildren) {
         };
     }, []);
     return (
-        <div className={'w-full'}>
-            <div className="fixed inset-0 flex justify-center sm:px-8">
-                <div className="flex w-full max-w-7xl lg:px-8">
-                    <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-gray-900 dark:ring-zinc-300/20"/>
+        <>
+            <div className="absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
+                <div className="w-[108rem] flex-none flex justify-end">
+                    <picture>
+                        <source srcSet="/Images/bg_small.avif" type="image/avif"/>
+                        <img src="/Images/small.avif" alt=""
+                             className="w-[71.75rem] flex-none max-w-none dark:hidden" decoding="async"/></picture>
+                    <picture>
+                        <source srcSet="/Images/bg_large.avif" type="image/avif"/>
+                        <img src="/Images/large.avif" alt=""
+                             className="w-[90rem] flex-none max-w-none hidden dark:block" decoding="async"/></picture>
                 </div>
             </div>
-            <div className="relative">
-                <Header/>
-                <main>
+            <div>
+            <Header/>
+                <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
                     <div className='fixed bottom-6 right-10 z-50'>
                         {showTopButton && (
                             <button type='button'
@@ -74,7 +81,8 @@ export default function Guest({children}: PropsWithChildren) {
                                 <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-white' fill='none'
                                      viewBox='0 0 24 24'
                                      stroke='currentColor' strokeWidth='1.5'>
-                                    <path strokeLinecap='round' strokeLinejoin='round' d='M8 7l4-4m0 0l4 4m-4-4v18'/>
+                                    <path strokeLinecap='round' strokeLinejoin='round'
+                                          d='M8 7l4-4m0 0l4 4m-4-4v18'/>
                                 </svg>
                             </button>
                         )}
@@ -86,9 +94,9 @@ export default function Guest({children}: PropsWithChildren) {
                     >
                         {children}
                     </div>
-                </main>
+                </div>
                 <Footer/>
             </div>
-        </div>
+        </>
     );
 }

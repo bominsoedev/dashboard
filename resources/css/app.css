@@ -1075,3 +1075,10 @@ body, html {
 .markdown-container em {
     color: #f0f0f0;
 }
+.dark .index_beams__yWcJT {
+    background-image: url('/Images/cover.jpg');
+    background-size: 86.125rem;
+}
+.dark\:bg-grid-slate-400\/\[0\.05\]:is(.dark *) {
+    background-image: url(/Images/cover2.svg);
+}

@@ -4,7 +4,8 @@ import {Card} from "@/Components/Card";
 import {Head} from "@inertiajs/react";
 import {SimpleLayout} from "@/Components/SimpleLayout";
 import {ToolsSection} from "@/Components/ToolsSection";
-import Guest from "@/Layouts/GuestLayout"; // Assuming Section is another component
+import Guest from "@/Layouts/GuestLayout";
+import {Container} from "@/Components/Container"; // Assuming Section is another component
 
 interface ToolProps {
     title: string;
@@ -33,32 +34,34 @@ export default function Uses({tools}: { tools: any }) {
                     content="Software I use, gadgets I love, and other things I recommend."
                 />
             </Head>
-            <SimpleLayout
-                title="Software I use, gadgets I love, and other things I recommend."
-                intro="I get asked a lot about the things I use to build software, stay productive, or buy to fool myself into thinking I’m being productive when I’m really just procrastinating. Here’s a big list of all of my favorite stuff."
-            >
-                <div className="space-y-20">
-                    {
-                        tools.map((section) => {
-                            return (
-                                <>
-                                    <ToolsSection title={section.sectionName}>
-                                        {
-                                            section.items.map((item) => {
-                                                return (
-                                                    <Tool title={item.title} href={''}>
-                                                        {item.content}
-                                                    </Tool>
-                                                )
-                                            })
-                                        }
-                                    </ToolsSection>
-                                </>
-                            )
-                        })
-                    }
-                </div>
-            </SimpleLayout>
+            <Container className="mt-16 sm:mt-32">
+                <SimpleLayout
+                    title="Software I use, gadgets I love, and other things I recommend."
+                    intro="I get asked a lot about the things I use to build software, stay productive, or buy to fool myself into thinking I’m being productive when I’m really just procrastinating. Here’s a big list of all of my favorite stuff."
+                >
+                    <div className="space-y-20">
+                        {
+                            tools.map((section: any) => {
+                                return (
+                                    <>
+                                        <ToolsSection title={section.sectionName}>
+                                            {
+                                                section.items.map((item: any) => {
+                                                    return (
+                                                        <Tool title={item.title} href={''}>
+                                                            {item.content}
+                                                        </Tool>
+                                                    )
+                                                })
+                                            }
+                                        </ToolsSection>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </SimpleLayout>
+            </Container>
         </Guest>
     )
 }

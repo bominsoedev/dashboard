@@ -7,6 +7,9 @@ import AvatarContainer from "@/Components/AvatarContainer";
 import Avatar from "@/Components/Avatar";
 import ModeToggle from "@/Components/ModeToggle";
 import NavLink from "@/Components/NavLink";
+import {InstagramIcon} from "@/Components/SocialIcons";
+import SocialLink from "@/Components/SocialLink";
+
 interface IconProps {
     className?: string;
 }
@@ -52,10 +55,13 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({href, children}) => (
 const MobileNavigation: React.FC = (props) => (
     <Popover {...props}>
         <Popover.Button
-            className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-gray-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
-            Menu
-            <ChevronDownIcon
-                className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"/>
+            className="flex items-center text-sm shadow-zinc-800/5 hover:text-primary dark:hover:text-primary  duration-300 backdrop-blur dark:text-zinc-200">
+            MENU
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                 stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/>
+            </svg>
         </Popover.Button>
         <Transition.Root>
             <Transition.Child
@@ -103,20 +109,23 @@ const MobileNavigation: React.FC = (props) => (
     </Popover>
 )
 const DesktopNavigation: React.FC = (props) => (
-    <nav {...props}>
-        <ul className="flex rounded bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+    <nav className={'leading-6 font-semibold text-slate-700 dark:text-slate-200'} {...props}>
+        <ul className="flex text-xs text-zinc-800 backdrop-blur dark:text-zinc-200">
             <NavLink href={route('welcome')} active={route().current('welcome')}>Home</NavLink>
             <NavLink href={route('about')} active={route().current('about')}>About</NavLink>
-            <NavLink href={route('articles.article_list')} active={route().current('articles.article_list')}>Article</NavLink>
+            <NavLink href={route('articles.article_list')}
+                     active={route().current('articles.article_list')}>Article</NavLink>
             <NavLink href={route('uses')} active={route().current('uses')}>Uses</NavLink>
         </ul>
     </nav>
 )
+
 function clamp(number: number, a: number, b: number) {
     let min = Math.min(a, b)
     let max = Math.max(a, b)
     return Math.min(Math.max(number, min), max)
 }
+
 const Header: React.FC = () => {
     let isHomePage = route().current('welcome')
     const headerRef = useRef<HTMLDivElement>(null);
@@ -139,7 +148,7 @@ const Header: React.FC = () => {
             const header = headerRef.current;
             if (!header) return;
 
-            const { top, height } = header.getBoundingClientRect();
+            const {top, height} = header.getBoundingClientRect();
             const scrollY = clamp(window.scrollY, 0, document.body.scrollHeight - window.innerHeight);
 
             if (isInitial.current) {
@@ -206,7 +215,7 @@ const Header: React.FC = () => {
         }
 
         updateStyles();
-        window.addEventListener('scroll', updateStyles, { passive: true });
+        window.addEventListener('scroll', updateStyles, {passive: true});
         window.addEventListener('resize', updateStyles);
 
         return () => {
@@ -217,76 +226,56 @@ const Header: React.FC = () => {
 
     return (
         <>
-            <header
-                className="pointer-events-none relative z-50 flex flex-none flex-col"
-                style={{
-                    height: 'var(--header-height)',
-                    marginBottom: 'var(--header-mb)',
-                }}
-            >
-                {isHomePage && (
-                    <>
-                        <div
-                            ref={avatarRef}
-                            className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
-                        />
-                        <Container
-                            className="top-0 order-last -mb-3 pt-3"
-                            style={{ position: 'var(--header-position)' }}
-                        >
-                            <div
-                                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                                style={{ position: 'var(--header-inner-position)' }}
-                            >
-                                <div className="relative">
-                                    <AvatarContainer
-                                        className="absolute left-0 top-3 origin-left transition-opacity"
-                                        style={{
-                                            opacity: 'var(--avatar-border-opacity, 0)',
-                                            transform: 'var(--avatar-border-transform)',
-                                        }}
-                                    />
-                                    <Avatar
-                                        large
-                                        className="block h-16 w-16 origin-left"
-                                        style={{ transform: 'var(--avatar-image-transform)' }}
-                                    />
-                                </div>
-                            </div>
-                        </Container>
-                    </>
-                )}
-                <div
-                    ref={headerRef}
-                    className="top-0 z-10 h-16 pt-6"
-                    style={{ position: 'var(--header-position)' }}
+            <div
+                className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
+                <div className="max-w-8xl mx-auto"
+                     style={{ position: 'var(--header-position)' }}
+                     ref={headerRef}
                 >
-                    <Container
-                        className="top-[var(--header-top,theme(spacing.6))] w-full"
-                        style={{ position: 'var(--header-inner-position)' }}
-                    >
-                        <div className="relative flex gap-4">
-                            <div className="flex flex-1">
-                                {!isHomePage && (
-                                    <AvatarContainer>
-                                        <Avatar />
-                                    </AvatarContainer>
-                                )}
-                            </div>
-                            <div className="flex flex-1 justify-end md:justify-center">
-                                <MobileNavigation className="pointer-events-auto md:hidden" />
-                                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-                            </div>
-                            <div className="flex justify-end md:flex-1">
-                                <div className="pointer-events-auto">
-                                    <ModeToggle />
+                    <div
+                        className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-6 lg:mx-0">
+                        <div className="relative flex items-center">
+                            <Link href="/" className={'mr-3 flex-none w-[3.0625rem] overflow-hidden md:w-auto'}>
+                                <AvatarContainer>
+                                    <Avatar/>
+                                </AvatarContainer>
+                            </Link>
+                            <div className="relative hidden lg:flex items-center ml-auto">
+                                <DesktopNavigation className="pointer-events-auto hidden md:block"/>
+                                <div
+                                    className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800 h-5">
+                                    <ModeToggle/>
+                                    <Link href={''}
+                                          className={'ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300'}>
+                                        <SocialLink
+                                            href="https://instagram.com"
+                                            aria-label="Follow on Instagram"
+                                            icon={InstagramIcon}
+                                            children={''}/>
+                                    </Link>
                                 </div>
+                            </div>
+                            <div
+                                className="ml-auto text-slate-500 w-8 h-8 -my-1 flex items-center justify-center hover:text-slate-600 lg:hidden dark:text-slate-400 dark:hover:text-slate-300">
+                                <MobileNavigation className="pointer-events-auto"/>
                             </div>
                         </div>
-                    </Container>
+                    </div>
                 </div>
-            </header>
-            {isHomePage && <div style={{ height: 'var(--content-offset)' }} />}
+            </div>
+            {/*<header*/}
+            {/*    className="pointer-events-none relative z-50 flex flex-none flex-col border-b border-b-slate-700"*/}
+
+            {/*>*/}
+            {/*    <div*/}
+            {/*        */}
+            {/*        className="top-0 z-10 h-16"*/}
+            {/*        */}
+            {/*    >*/}
+
+            {/*    </div>*/}
+            {/*</header>*/}
+            {isHomePage && <div style={{height: 'var(--content-offset)'}}/>}
         </>
     )
 }
