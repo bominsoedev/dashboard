@@ -8,7 +8,6 @@ import {formatDate} from "@/lib/formatDate";
 import {Head} from "@inertiajs/react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ReactDOMServer from "react-dom/server";
-import hljs from "highlight.js";
 
 const Article = ({article}: { article: any }) => {
     const [markdown, setMarkdown] = useState<string>(article.content);
@@ -99,11 +98,6 @@ const Article = ({article}: { article: any }) => {
         axios.post('/markdown', {markdown})
             .then(response => {
                 setHtml(response.data);
-                setTimeout(() => {
-                    document.querySelectorAll('pre code').forEach((block) => {
-                        hljs.highlightElement(block as HTMLElement);
-                    });
-                }, 0)
             });
     }, [markdown]);
     return (
