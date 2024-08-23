@@ -1,7 +1,9 @@
 @import 'prism.css';
 /* Animate css */
 @import 'animate.css';
-@import "easymde/dist/easymde.min.css";
+
+@import 'react-perfect-scrollbar/dist/css/styles.css';
+
 /* tippy css */
 @import 'tippy.css';
 
