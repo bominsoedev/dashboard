@@ -210,10 +210,10 @@ const Create = ({categories}: { categories: any }) => {
                         Create Article
                     </title>
                 </Head>
-                <div className="items-center">
+                <div className="flex items-center w-full sm:w-auto h-[20px]">
                     <Breadcrumb menu={menus} className={''}/>
                 </div>
-                <div className="mt-5 grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                     <div className="panel col-span-2">
                         <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-2">
                             <Field>

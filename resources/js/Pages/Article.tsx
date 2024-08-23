@@ -145,11 +145,20 @@ const Article = ({article}: { article: any }) => {
                                     article.attachment &&
                                     (
                                         <div className="my-5">
-                                            <img
-                                                src={`/storage/${article.attachment.image_location}`}
-                                                alt="Feature Photo"
-                                                className="aspect-square rounded w-full !max-h-[400px] text-gray-300 object-cover"
-                                            />
+                                            <figure className="max-w-lg">
+                                                <img className="h-auto max-w-full rounded-lg"
+                                                     src={`/storage/${article.attachment.image_location}`}
+                                                     alt="image description"/>
+                                                <figcaption
+                                                    className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">Image
+                                                    caption
+                                                </figcaption>
+                                            </figure>
+                                            {/*<img*/}
+                                            {/*    src={`/storage/${article.attachment.image_location}`}*/}
+                                            {/*    alt="Feature Photo"*/}
+                                            {/*    className="aspect-square rounded size-full h-auto max-w-full text-gray-300 object-cover"*/}
+                                            {/*/>*/}
                                         </div>
                                     )
                                 }

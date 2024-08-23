@@ -27,7 +27,10 @@ return [
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],
-
+    'recaptcha' => [
+        'sitekey' => env('NOCAPTCHA_SITEKEY'),
+        'secret'  => env('NOCAPTCHA_SECRET'),
+    ],
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
