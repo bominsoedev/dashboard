@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, {FormEventHandler, useRef} from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
@@ -5,13 +6,15 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import {Head, Link, useForm, usePage} from '@inertiajs/react';
 import {Container} from "@/Components/Container";
 import ReCAPTCHA from 'react-google-recaptcha';
+import {PageProps} from "@/types";
 
-export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
+export default function Login({status, canResetPassword}: { status?: string, canResetPassword: boolean }) {
     const recaptchaRef = useRef<ReCAPTCHA>(null);
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const SITE_KEY = usePage<PageProps>().props.KEY;
+    const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
         password: '',
         remember: false,
@@ -80,6 +83,10 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                                 <InputError message={errors.password} className="mt-2"/>
                             </div>
 
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={SITE_KEY.SITE_KEY}
+                            />
                             <div className="block mt-4">
                                 <label className="flex items-center">
                                     <Checkbox
@@ -90,10 +97,6 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                                     <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
                                 </label>
                             </div>
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                sitekey={'6Lcmmi0qAAAAABCDXuFuYaozu2EpHjEVg5OP5PxA'}
-                            />
                             <div className="flex items-center justify-end mt-4">
                                 {canResetPassword && (
                                     <Link
