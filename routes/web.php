@@ -16,7 +16,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'articles' => Article::orderBy('id', 'desc')->take(6)->get()
+        'articles' => Article::all()
     ]);
 })->name('welcome');
 Route::get('article_list', function () {

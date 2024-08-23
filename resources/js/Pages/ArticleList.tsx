@@ -22,6 +22,12 @@ function Article({article}: { article: any }) {
                 >
                     <div className="flex items-center justify-between w-full">
                         {formatDate(article.created_at)}
+                        <div className="uppercase">
+                    <span
+                        className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-teal-600 ring-1 ring-inset ring-teal-500/10">
+                        {article.category.name}
+                    </span>
+                        </div>
                     </div>
                 </Card.Eyebrow>
                 <Card.Description>{article.excerpt}</Card.Description>
@@ -36,12 +42,6 @@ function Article({article}: { article: any }) {
                     <Avatar/>
                     <div className="uppercase ml-3">
                         {article.user.name}
-                        <div className="uppercase">
-                    <span
-                        className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-teal-600 ring-1 ring-inset ring-teal-500/10">
-                        {article.category.name}
-                    </span>
-                        </div>
                     </div>
                 </div>
             </Card.Eyebrow>
