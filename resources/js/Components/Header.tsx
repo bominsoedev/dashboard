@@ -27,18 +27,6 @@ const CloseIcon: React.FC<IconProps> = (props) => (
     </svg>
 )
 
-const ChevronDownIcon: React.FC<IconProps> = (props) => (
-    <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
-        <path
-            d="M1.75 1.75 4 4.25l2.25-2.5"
-            fill="none"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-)
-
 interface MobileNavItemProps {
     href: string;
     children: React.ReactNode;
@@ -46,7 +34,8 @@ interface MobileNavItemProps {
 
 const MobileNavItem: React.FC<MobileNavItemProps> = ({href, children}) => (
     <li>
-        <Popover.Button as={Link} href={href} className="block py-2">
+        <Popover.Button as={Link} href={href}
+                        className="block py-2 uppercase hover:text-primary dark:hover:text-primary text-xs font-extrabold duration-300">
             {children}
         </Popover.Button>
     </li>
@@ -86,23 +75,37 @@ const MobileNavigation: React.FC = (props) => (
             >
                 <Popover.Panel
                     focus
-                    className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-gray-900 dark:ring-zinc-800"
+                    className="fixed top-20 right-10 w-full max-w-xs z-50 origin-top rounded bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-gray-900 dark:ring-zinc-800"
                 >
                     <div className="flex flex-row-reverse items-center justify-between">
-                        <Popover.Button aria-label="Close menu" className="-m-1 p-1">
-                            <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400"/>
+                        <Popover.Button aria-label="Close menu" className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300">
+                            <svg viewBox="0 0 10 10" className="w-2.5 h-2.5 overflow-visible" aria-hidden="true">
+                                <path d="M0 0L10 10M10 0L0 10" fill="none" stroke="currentColor" stroke-width="2"
+                                      stroke-linecap="round"></path>
+                            </svg>
                         </Popover.Button>
-                        <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                            KZY Photography
-                        </h2>
                     </div>
                     <nav className="mt-6">
                         <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+                            <MobileNavItem href="/">Home</MobileNavItem>
                             <MobileNavItem href="/about">About</MobileNavItem>
                             <MobileNavItem href="/article_list">Articles</MobileNavItem>
                             <MobileNavItem href="/uses">Uses</MobileNavItem>
                         </ul>
                     </nav>
+                    <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-200/10">
+                    <div className="flex items-center justify-between gap-3">
+                            <div className="">
+                                <label className={'text-xs uppercase text-nowrap mb-0'}>
+                                    Switch theme
+                                </label>
+                            </div>
+                            <div
+                                className="relative w-full max-w-xs flex items-center ring-1 ring-slate-900/10 shadow-sm p-2 text-slate-700 font-semibold dark:ring-0 dark:highlight-white/5 dark:text-slate-200">
+                                <ModeToggle name={true}/>
+                            </div>
+                        </div>
+                    </div>
                 </Popover.Panel>
             </Transition.Child>
         </Transition.Root>
@@ -229,7 +232,7 @@ const Header: React.FC = () => {
             <div
                 className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
                 <div className="max-w-8xl mx-auto"
-                     style={{ position: 'var(--header-position)' }}
+                     style={{position: 'var(--header-position)'}}
                      ref={headerRef}
                 >
                     <div

@@ -1,10 +1,10 @@
 //@ts-nocheck
 import React from 'react'
-import { toggleTheme } from '@/store/themeConfigSlice';
+import {toggleTheme} from '@/store/themeConfigSlice';
 import {useDispatch, useSelector} from "react-redux";
 import {IRootState} from "@/store";
 
-const ModeToggle: React.FC = () => {
+const ModeToggle: React.FC = ({name = false}: { name: boolean }) => {
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
     return (
@@ -13,7 +13,7 @@ const ModeToggle: React.FC = () => {
                 <button
                     className={`${
                         themeConfig.theme === 'light' &&
-                        'flex items-center hover:text-primary'
+                        'flex items-center hover:text-primary text-xs gap-1'
                     }`}
                     onClick={() => {
                         dispatch(toggleTheme('dark'));
@@ -39,6 +39,15 @@ const ModeToggle: React.FC = () => {
                         <path opacity='0.5' d='M19.7778 19.7773L17.5558 17.5551' stroke='currentColor'
                               strokeWidth='1.5' strokeLinecap='round'/>
                     </svg>
+                    {
+                        name && (
+                            <>
+                                <label className={'mb-0'}>
+                                    LIGHT THEME
+                                </label>
+                            </>
+                        )
+                    }
                 </button>
             ) : (
                 ''
@@ -47,7 +56,7 @@ const ModeToggle: React.FC = () => {
                 <button
                     className={`${
                         themeConfig.theme === 'dark' &&
-                        'flex items-center hover:text-primary'
+                        'flex items-center hover:text-primary text-xs gap-1'
                     }`}
                     onClick={() => {
                         dispatch(toggleTheme('system'));
@@ -60,13 +69,22 @@ const ModeToggle: React.FC = () => {
                             fill='currentColor'
                         />
                     </svg>
+                    {
+                        name && (
+                            <>
+                                <label className={'mb-0'}>
+                                    DARK THEME
+                                </label>
+                            </>
+                        )
+                    }
                 </button>
             )}
             {themeConfig.theme === 'system' && (
                 <button
                     className={`${
                         themeConfig.theme === 'system' &&
-                        'flex items-center hover:text-primary'
+                        'flex items-center hover:text-primary text-xs gap-1'
                     }`}
                     onClick={() => {
                         dispatch(toggleTheme('light'));
@@ -84,6 +102,15 @@ const ModeToggle: React.FC = () => {
                         <path opacity='0.5' d='M15 15H9' stroke='currentColor' strokeWidth='1.5'
                               strokeLinecap='round'/>
                     </svg>
+                    {
+                        name && (
+                            <>
+                                <label className={'mb-0'}>
+                                    DEFAULT THEME
+                                </label>
+                            </>
+                        )
+                    }
                 </button>
             )}
         </div>
