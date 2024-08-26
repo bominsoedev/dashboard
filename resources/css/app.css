@@ -5,7 +5,7 @@
 @import 'react-perfect-scrollbar/dist/css/styles.css';
 
 @import "github-dark-custom.css";
-
+@import 'react-photo-view/dist/react-photo-view.css';
 /* tippy css */
 @import 'tippy.css';
 
@@ -827,22 +827,27 @@
     box-shadow: none;
     padding: 0.625rem;
 }
+
 .Button--invisible .Button-visual {
     color: #778491;
 }
+
 svg:not(:root) {
     overflow: hidden;
 }
+
 .Button-visual {
     display: flex;
     pointer-events: none;
 }
+
 .octicon {
     display: inline-block;
     overflow: visible !important;
     vertical-align: text-bottom;
     fill: currentColor;
 }
+
 .bg-card-900 {
     --tw-bg-opacity: 1;
     background-color: rgb(20 25 36 / var(--tw-bg-opacity));
@@ -966,6 +971,7 @@ svg:not(:root) {
 .copy-button.dark:active {
     background-color: #1a202c;
 }
+
 /* Global Styles */
 body, html {
     font-family: 'Arial', sans-serif;

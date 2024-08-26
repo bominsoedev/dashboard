@@ -1,8 +1,9 @@
-//@ts-nocheck
 import Guest from "@/Layouts/GuestLayout";
 import {Head, Link} from "@inertiajs/react";
 import clsx from "clsx";
 import React, {useEffect, useState} from "react";
+import {PhotoProvider, PhotoView} from "react-photo-view";
+import {images} from "next/dist/build/webpack/config/blocks/images";
 
 const Portfolio = ({photos, tags}: { photos: any, tags: any }) => {
     const [filteredItems, setFilteredItems] = useState<any>(photos);
@@ -49,15 +50,19 @@ const Portfolio = ({photos, tags}: { photos: any, tags: any }) => {
                                     className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-7 gap-2 space-y-2 bg-gray-50 dark:bg-slate-900 p-5 rounded">
                                     {filteredItems.length ? (
                                         <>
-                                            {filteredItems.map((photo: any) => (
-                                                <div key={photo.id}
-                                                     className="break-inside-avoi border dark:border-slate-800 rounded">
-                                                    <img
-                                                        className="h-auto max-w-full rounded-lg opacity-90 hover:opacity-100 duration-300"
-                                                        src={`/storage/${photo.image_location}`}
-                                                        alt="Gallery image"/>
-                                                </div>
-                                            ))}
+                                            <PhotoProvider
+                                                maskOpacity={0.5}
+                                                bannerVisible={true}
+                                                loop={4}
+                                                speed={() => 800}
+                                                easing={(type) => (type === 2 ? 'cubic-bezier(0.36, 0, 0.66, -0.56)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)')}
+                                            >
+                                                {filteredItems.map((photo: any) => (
+                                                    <PhotoView key={photo.id} src={`/storage/${photo.image_location}`} height={500}>
+                                                        <img className={'hover:cursor-pointer'} src={`/storage/${photo.image_location}`} alt=""/>
+                                                    </PhotoView>
+                                                ))}
+                                            </PhotoProvider>
                                         </>
                                     ) : ''}
                                 </div>
