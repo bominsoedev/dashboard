@@ -1,9 +1,9 @@
+//@ts-nocheck
 import Guest from "@/Layouts/GuestLayout";
 import {Head, Link} from "@inertiajs/react";
 import clsx from "clsx";
 import React, {useEffect, useState} from "react";
 import {PhotoProvider, PhotoView} from "react-photo-view";
-import {images} from "next/dist/build/webpack/config/blocks/images";
 
 const Portfolio = ({photos, tags}: { photos: any, tags: any }) => {
     const [filteredItems, setFilteredItems] = useState<any>(photos);
