@@ -8,6 +8,7 @@ use App\Models\Categories;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -97,8 +98,41 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(Categories $category)
     {
-        dd($categories);
+        try {
+            DB::beginTransaction();
+
+            // Perform the delete operation
+            $category->delete();
+
+            DB::commit();
+
+            return redirect()->route('categories.category')->with('success', 'Category deleted successfully.');
+
+        } catch (QueryException $exception) {
+            DB::rollBack();
+
+            // Log the exception for debugging purposes
+            Log::error('Failed to delete article: ', [
+                'error' => $exception->getMessage(),
+                'article_id' => $category->id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return redirect()->route('categories.category')->with('error',
+                'Failed to delete the category due to a database error.');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            // Log any unexpected errors
+            Log::error('Unexpected error occurred while deleting article: ', [
+                'error' => $exception->getMessage(),
+                'article_id' => $category->id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return redirect()->route('categories.category')->with('error', 'An unexpected error occurred.');
+        }
     }
 }

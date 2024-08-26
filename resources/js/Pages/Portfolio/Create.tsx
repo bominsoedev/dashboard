@@ -77,8 +77,8 @@ const Create = ({ tags }: { tags: any }) => {
 
     const menus = [
         { link: route('dashboard'), name: 'dashboard' },
-        { link: route('article.index'), name: 'articles' },
-        { link: '', name: 'create article' },
+        { link: route('portfolios.portfolio'), name: 'portfolios' },
+        { link: '', name: 'create portfolios' },
     ];
 
     return (

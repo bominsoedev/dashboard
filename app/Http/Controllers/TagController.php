@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -83,6 +84,39 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            // Perform the delete operation
+            $tag->delete();
+
+            DB::commit();
+
+            return redirect()->route('tags.tag')->with('success', 'Tag deleted successfully.');
+
+        } catch (QueryException $exception) {
+            DB::rollBack();
+
+            // Log the exception for debugging purposes
+            Log::error('Failed to delete article: ', [
+                'error' => $exception->getMessage(),
+                'article_id' => $tag->id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return redirect()->route('tags.tag')->with('error',
+                'Failed to delete the tag due to a database error.');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            // Log any unexpected errors
+            Log::error('Unexpected error occurred while deleting article: ', [
+                'error' => $exception->getMessage(),
+                'article_id' => $tag->id,
+                'user_id' => auth()->id(),
+            ]);
+
+            return redirect()->route('tags.tag')->with('error', 'An unexpected error occurred.');
+        }
     }
 }
