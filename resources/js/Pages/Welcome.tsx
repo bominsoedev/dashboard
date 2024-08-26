@@ -132,7 +132,7 @@ export default function Welcome({articles}: { articles: any }) {
                                                         ))}
                                                     </div>
                                                     <code
-                                                        className="flex-auto relative text-slate-50 pt-4 pb-4 px-4 overflow-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                                        className="pt-4 pb-4 px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                                         <PhotoProvider
                                                             maskOpacity={0.5}
                                                             bannerVisible={true}

@@ -78,20 +78,17 @@ class PortfolioController extends Controller
             DB::commit();
             return redirect()->route('portfolios.portfolio')->with('success', 'Portfolio created successfully.');
         } catch (ValidationException $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->route('portfolios.portfolio')
                 ->withErrors($e->validator)
                 ->withInput();
         } catch (QueryException $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->route('portfolios.portfolio')->with('error',
                 'Portfolio creation failed due to a database error.');
         } catch (Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
 
             return redirect()->route('portfolios.portfolio')->with('error', 'An unexpected error occurred.');

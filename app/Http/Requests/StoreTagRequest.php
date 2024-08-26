@@ -22,7 +22,7 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tag' => 'required|unique:categories,name',
+            'tag' => 'required|unique:tags,name',
         ];
     }
 }
