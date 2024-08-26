@@ -56,7 +56,7 @@ const Portfolio = ({photos, tags}: { photos: any, tags: any }) => {
                                 <div className="relative px-4 sm:px-8 lg:px-12">
                                     <div className="mx-auto w-full max-w-8xl">
                                         <div
-                                            className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-7 gap-2 space-y-2 bg-gray-50 dark:bg-slate-900 p-5 rounded">
+                                            className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-7 gap-2 space-y-2 p-5 rounded">
 
                                             <>
                                                 <PhotoProvider
