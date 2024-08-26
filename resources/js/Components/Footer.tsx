@@ -10,6 +10,7 @@ export function Footer() {
                     <Container.Inner>
                         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                             <div className="flex gap-3 text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                                <NavLink href={route('portfolio')} active={route().current('portfolio')}>Portfolio</NavLink>
                                 <NavLink href={route('welcome')} active={route().current('welcome')}>Home</NavLink>
                                 <NavLink href={route('about')} active={route().current('about')}>About</NavLink>
                                 <NavLink href={route('articles.article_list')} active={route().current('articles.article_list')}>Articles</NavLink>

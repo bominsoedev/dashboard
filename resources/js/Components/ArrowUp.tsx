@@ -13,7 +13,7 @@ const IconArrowUp: React.FC<IconProps> = ({
                                               fill = 'currentColor',
                                               className = 'icon-2xl',
                                           }) => (
-    <span className={'rounded-full bg-gray-500 mr-1'}>
+    <span className={'rounded-full mr-1'}>
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width={width}

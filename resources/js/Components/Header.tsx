@@ -1,7 +1,6 @@
 //@ts-nocheck
 import React, {Fragment, useEffect, useRef} from 'react'
 import {Popover, Transition} from '@headlessui/react'
-import {Container} from "@/Components/Container";
 import {Link} from "@inertiajs/react";
 import AvatarContainer from "@/Components/AvatarContainer";
 import Avatar from "@/Components/Avatar";
@@ -87,6 +86,7 @@ const MobileNavigation: React.FC = (props) => (
                     </div>
                     <nav className="mt-6">
                         <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+                            <MobileNavItem href="/portfolio">Portfolio</MobileNavItem>
                             <MobileNavItem href="/">Home</MobileNavItem>
                             <MobileNavItem href="/about">About</MobileNavItem>
                             <MobileNavItem href="/article_list">Articles</MobileNavItem>
@@ -114,6 +114,7 @@ const MobileNavigation: React.FC = (props) => (
 const DesktopNavigation: React.FC = (props) => (
     <nav className={'leading-6 font-semibold text-slate-700 dark:text-slate-200'} {...props}>
         <ul className="flex text-xs text-zinc-800 backdrop-blur dark:text-zinc-200">
+            <NavLink href={route('portfolio')} active={route().current('portfolio')}>Portfolio</NavLink>
             <NavLink href={route('welcome')} active={route().current('welcome')}>Home</NavLink>
             <NavLink href={route('about')} active={route().current('about')}>About</NavLink>
             <NavLink href={route('articles.article_list')}
@@ -230,7 +231,7 @@ const Header: React.FC = () => {
     return (
         <>
             <div
-                className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
+                className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] supports-backdrop-blur:bg-white/60 dark:bg-transparent">
                 <div className="max-w-8xl mx-auto"
                      style={{position: 'var(--header-position)'}}
                      ref={headerRef}

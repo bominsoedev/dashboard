@@ -2,14 +2,20 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsSectionController;
 use App\Models\Article;
 use App\Models\Categories;
+use App\Models\Photo;
+use App\Models\Portfolio;
+use App\Models\Tag;
 use App\Models\Tool;
 use App\Models\ToolsSection;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -19,11 +25,19 @@ Route::get('/', function () {
         'articles' => Article::all()
     ]);
 })->name('welcome');
-Route::get('article_list', function () {
-    return Inertia::render('ArticleList', [
-        'articles' => Article::orderBy('id', 'desc')->get()
-    ]);
-})->name('articles.article_list');
+Route::get('article_list', fn() => Inertia::render('ArticleList', [
+    'articles' => Article::orderBy('id', 'desc')->get()
+]))->name('articles.article_list');
+
+Route::get('portfolio', function (Request $request) {
+    $slug = $request->input('tag', []);
+    return Inertia::render('Portfolio', array(
+        'photos' => Photo::with(['portfolio', 'tags'])
+            ->filter(request(['tag']))
+            ->paginate(50),
+        'tags' => Tag::all()
+    ));
+})->name('portfolio');
 
 Route::post('/markdown', fn() => Str::of(request('markdown'))->markdown())->name('markdown');
 Route::get('/about', fn() => Inertia::render('About'))->name('about');
@@ -129,7 +143,8 @@ Route::middleware(['auth'])->prefix('session/admin/')->group(function () {
     Route::get('articles/create_article', [ArticleController::class, 'create'])->name('article.create');
     Route::post('articles/create_article', [ArticleController::class, 'store'])->name('articles.create-article');
     Route::get('articles/{article:slug}', [ArticleController::class, 'admin_show'])->name('article.admin_show');
-    Route::delete('articles/destroy_article/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy-article');
+    Route::delete('articles/destroy_article/{article}',
+        [ArticleController::class, 'destroy'])->name('articles.destroy-article');
 
     //tools
     Route::get('tools', [ToolController::class, 'index'])->name('tool.index');
@@ -152,6 +167,25 @@ Route::middleware(['auth'])->prefix('session/admin/')->group(function () {
         [ToolsSectionController::class, 'store'])->name('tool_sections.create-tool_section');
     Route::post('tool_sections/edit_tool_section/{toolsSection}',
         [ToolsSectionController::class, 'update'])->name('tool_sections.update-tool_section');
+
+    //Tags
+    Route::get('tags/tag', [TagController::class, 'index'])->name('tags.tag');
+    Route::post('tags/create_tag',
+        [TagController::class, 'store'])->name('tags.create-tag');
+    Route::post('tags/edit_tag/{tag}',
+        [TagController::class, 'update'])->name('tags.update-tag');
+    Route::delete('tags/destroy_tag/{tag}',
+        [TagController::class, 'destroy'])->name('tags.destroy-tag');
+
+    //Portfolio
+    Route::get('portfolios/portfolio', [PortfolioController::class, 'index'])->name('portfolios.portfolio');
+    Route::get('portfolios/create_portfolio', [PortfolioController::class, 'create'])->name('portfolios.create');
+    Route::post('portfolios/create_portfolio',
+        [PortfolioController::class, 'store'])->name('portfolios.create-portfolio');
+    Route::post('portfolios/edit_portfolio/{portfolio}',
+        [PortfolioController::class, 'update'])->name('portfolios.update-portfolio');
+    Route::delete('portfolios/destroy_portfolio/{portfolio}',
+        [PortfolioController::class, 'destroy'])->name('portfolios.destroy-portfolio');
 });
 
 require __DIR__.'/auth.php';

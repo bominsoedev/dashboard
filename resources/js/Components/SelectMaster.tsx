@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { FC } from 'react';
 import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui/react';
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/react/16/solid";
@@ -14,29 +15,6 @@ interface SelectMasterProps {
     onChange: (id: string) => void;
 }
 
-const ProviderImage: FC<{ slug: string }> = ({ slug }) => {
-    const getImageSrc = () => {
-        switch (slug) {
-            case 'kbz_pay':
-                return '/assets/provider/Kpay.webp';
-            case 'wave_pay':
-                return '/assets/provider/wave.jpeg';
-            case 'aya_pay':
-                return '/assets/provider/download.jpeg';
-            default:
-                return '';
-        }
-    };
-
-    return (
-        <img
-            alt={slug}
-            src={getImageSrc()}
-            className="h-5 w-5 flex-shrink-0 rounded-full"
-        />
-    );
-};
-
 const SelectMaster: FC<SelectMasterProps> = ({ providers, selectedProviderId, onChange }) => {
     const selectedProvider = providers.find(provider => provider.id === selectedProviderId);
 
@@ -45,7 +23,6 @@ const SelectMaster: FC<SelectMasterProps> = ({ providers, selectedProviderId, on
             <div className="relative">
                 <ListboxButton className="relative block w-full appearance-none outline-none rounded border-none bg-gray-100 dark:bg-white/5 py-1.5 px-3 text-sm/6 text-gray-900 dark:text-white">
           <span className="flex items-center">
-            {/*{selectedProvider && <ProviderImage slug={selectedProvider.slug} />}*/}
               <span className="ml-3 block truncate">
               {selectedProvider?.name} <span className="text-gray-400 dark:text-gray-500">@{selectedProvider?.slug}</span>
             </span>

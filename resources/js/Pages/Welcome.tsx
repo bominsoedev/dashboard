@@ -106,7 +106,7 @@ export default function Welcome({articles}: { articles: any }) {
                         content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
                     />
                 </Head>
-                <Container className={'relative max-w-8xl mx-auto pt-20 sm:pt-24 lg:pt-32'}>
+                <Container className={'relative max-w-8xl mx-auto pt-20 sm:pt-24 lg:pt-32 max-w-7xl xl:max-w-8xl'}>
                     <section
                         className="flex w-full flex-1 flex-col mobile:px-4 lg:items-center pt-0">
                         <header
@@ -173,7 +173,7 @@ export default function Welcome({articles}: { articles: any }) {
                         </div>
                     </section>
                 </Container>
-                <Container className="container mt-24 md:mt-28">
+                <Container className="container mt-24 md:mt-28 max-w-7xl xl:max-w-8xl">
                     <header
                         className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
                         <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
@@ -182,7 +182,7 @@ export default function Welcome({articles}: { articles: any }) {
                     </header>
                 </Container>
                 <Photos/>
-                <Container className="container mt-24 md:mt-28">
+                <Container className="container mt-24 md:mt-28 max-w-7xl xl:max-w-8xl">
                     <header
                         className="container relative mx-auto mb-10 flex items-center justify-between px-[30px] xl:px-0">
                         <p className="inherits-color absolute right-0 z-10 hidden translate-y-4 xl:translate-y-2 font-kanit md:text-6xl lg:text-[75px] xl:text-[80px] font-bold uppercase text-card-500 md:block">
