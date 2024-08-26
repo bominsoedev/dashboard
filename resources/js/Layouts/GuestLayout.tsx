@@ -63,6 +63,21 @@ export default function Guest({children}: PropsWithChildren) {
                 <div className="flex w-full max-w-8xl lg:px-8">
                     <div
                         className="w-full bg-white ring-1 dark:ring-slate-800 ring-zinc-100 text-slate-500 dark:text-slate-400 dark:bg-slate-900 "/>
+                    <div
+                        className="absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
+                        <div className="w-[108rem] flex-none flex justify-end">
+                            <picture>
+                                <source srcSet="/Images/bg_small.avif" type="image/avif"/>
+                                <img src="/Images/small.avif" alt=""
+                                     className="w-[71.75rem] flex-none max-w-none dark:hidden" decoding="async"/>
+                            </picture>
+                            <picture>
+                                <source srcSet="/Images/bg_large.avif" type="image/avif"/>
+                                <img src="/Images/large.avif" alt=""
+                                     className="w-[90rem] flex-none max-w-none hidden dark:block" decoding="async"/>
+                            </picture>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className={'relative'}>
@@ -73,7 +88,7 @@ export default function Guest({children}: PropsWithChildren) {
                             <button type='button'
                                     className='btn btn-outline-primary rounded-full p-2 animate-pulse bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-700'
                                     onClick={goToTop}>
-                                <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-white' fill='none'
+                            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 text-white' fill='none'
                                      viewBox='0 0 24 24'
                                      stroke='currentColor' strokeWidth='1.5'>
                                     <path strokeLinecap='round' strokeLinejoin='round'
