@@ -8,6 +8,8 @@ import {formatDate} from "@/lib/formatDate";
 import {Head} from "@inertiajs/react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ReactDOMServer from "react-dom/server";
+import {PhotoProvider, PhotoView} from "react-photo-view";
+import hljs from "highlight.js";
 
 const Article = ({article}: { article: any }) => {
     const [markdown, setMarkdown] = useState<string>(article.content);
@@ -98,6 +100,11 @@ const Article = ({article}: { article: any }) => {
         axios.post('/markdown', {markdown})
             .then(response => {
                 setHtml(response.data);
+                setTimeout(() => {
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightElement(block as HTMLElement);
+                    }, 0);
+                })
             });
     }, [markdown]);
     return (
@@ -108,13 +115,13 @@ const Article = ({article}: { article: any }) => {
                 </Head>
                 <Container className="mt-16 lg:mt-32">
                     <div className="xl:relative">
-                        <div className="mx-auto max-w-2xl">
+                        <div className="mx-auto max-w-8xl">
 
                             <button
                                 type="button"
                                 onClick={goBack}
                                 aria-label="Go back to articles"
-                                className="group mb-8 flex h-10 w-10 items-center justify-center lg:absolute lg:-left-5 lg:mb-0 lg:-mt-2 xl:-top-1.5 xl:left-0 xl:mt-0"
+                                className="group mb-8 flex h-10 w-10 items-center justify-center lg:absolute lg:-left-5 lg:mb-0 lg:-mt-2 xl:-top-1.5 xl:-left-24 xl:mt-0"
                             >
                                 <ArrowLeftIcon
                                     className="h-4 w-4 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400"/>
@@ -145,14 +152,23 @@ const Article = ({article}: { article: any }) => {
                                     article.attachment &&
                                     (
                                         <div className="my-5">
-                                            <figure className="max-w-lg">
-                                                <img className="h-auto max-w-full rounded-lg"
-                                                     src={`/storage/${article.attachment.image_location}`}
-                                                     alt="image description"/>
-                                                <figcaption
-                                                    className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">Image
-                                                    caption
-                                                </figcaption>
+                                            <figure className="max-w-5xl">
+                                                <PhotoProvider
+                                                    maskOpacity={0.5}
+                                                    bannerVisible={true}
+                                                    loop={4}
+                                                    speed={() => 800}
+                                                    easing={(type) => (type === 2 ? 'cubic-bezier(0.36, 0, 0.66, -0.56)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)')}
+                                                >
+                                                    <PhotoView
+                                                        src={`/storage/${article.attachment.image_location}`}>
+                                                        <img
+                                                            src={`/storage/${article.attachment.image_location}`}
+                                                            alt="Feature Photo"
+                                                            className="aspect-square rounded w-full !max-h-[400px] text-gray-300 object-cover"
+                                                        />
+                                                    </PhotoView>
+                                                </PhotoProvider>
                                             </figure>
                                             {/*<img*/}
                                             {/*    src={`/storage/${article.attachment.image_location}`}*/}
@@ -164,7 +180,7 @@ const Article = ({article}: { article: any }) => {
                                 }
                                 {html && (
                                     <PerfectScrollbar
-                                        className="relative min-w-full h-screen chat-conversation-box bg-gray-100 dark:bg-white/5 p-4 rounded prose dark:prose-invert"
+                                        className="relative min-w-full chat-conversation-box p-4 rounded prose dark:prose-invert"
                                         dangerouslySetInnerHTML={{__html: markdownToHtml(html)}}>
                                     </PerfectScrollbar>
                                 )

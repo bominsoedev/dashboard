@@ -5,7 +5,8 @@ import {formatDate} from "@/lib/formatDate";
 import {Head} from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Breadcrumb from "@/Components/Breadcrumb";
-import markdownToHtml from "@/Components/MarkdownEditor"; // Choose your preferred Highlight.js theme
+import markdownToHtml from "@/Components/MarkdownEditor";
+import hljs from "highlight.js"; // Choose your preferred Highlight.js theme
 
 
 const Article = ({article}: { article: any }) => {
@@ -15,6 +16,11 @@ const Article = ({article}: { article: any }) => {
         axios.post('/markdown', {markdown})
             .then(response => {
                 setHtml(response.data);
+                setTimeout(() => {
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightElement(block as HTMLElement);
+                    }, 0);
+                })
             });
     }, [markdown]);
     const menus = [
