@@ -70,7 +70,7 @@ const Portfolio = ({photos, tags}: { photos: any, tags: any }) => {
                                                         <PhotoView key={photo.id}
                                                                    src={`/storage/${photo.image_location}`}
                                                                    height={500}>
-                                                            <img className={'hover:cursor-pointer'}
+                                                            <img className={'hover:cursor-pointer rounded'}
                                                                  src={`/storage/${photo.image_location}`} alt=""/>
                                                         </PhotoView>
                                                     ))}
