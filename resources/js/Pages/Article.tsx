@@ -39,7 +39,7 @@ const Article = ({article}: { article: any }) => {
             (match: string, language: string, code: string) => {
                 const codeBlock = (
                     <div className="flex justify-center">
-                        <div className="w-[500px] relative">
+                        <div className="max-w-md md:max-w-xl lg:max-w-2xl relative">
                             <div
                                 className="flex items-center relative text-[#b4b4b4] bg-[#2f2f2f] px-4 py-2 text-xs font-sans justify-between rounded-t-md">
                         <span>
