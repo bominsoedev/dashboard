@@ -171,7 +171,7 @@ export default function Welcome({articles}: { articles: any }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="relative row-start-1 col-start-1 col-span-10 md:col-span-12 lg:col-span-10 xl:col-span-12 mt-28 md:mt-10 lg:mt-10 xl:mt-10">
+                        <div className="relative row-start-1 col-start-1 col-span-5 xl:col-span-6 xl:10 lg:mt-10 md:10 mt-28">
                             <div
                                 className="h-[24.25rem] max-w-xl mx-auto lg:max-w-none flex items-center justify-center">
                                 <div className="w-full flex-none">
