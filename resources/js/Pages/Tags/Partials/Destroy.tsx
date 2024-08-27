@@ -40,7 +40,7 @@ const CreateOrEdit = ({tag = null}: { tag: any }) => {
     };
     return (
         <>
-            <DangerButton onClick={confirm}>
+            <button className={'flex items-center text-red-500 uppercase'} onClick={confirm}>
                 <>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const CreateOrEdit = ({tag = null}: { tag: any }) => {
                     </svg>
                     Destroy
                 </>
-            </DangerButton>
+            </button>
             <Modal show={confirming} onClose={closeModal}>
                 <form onSubmit={handleDelete} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">

@@ -89,7 +89,7 @@ const Index = ({articles}: { articles: any }) => {
                                                         <p className="text-sm font-semibold leading-6 uppercase">Action</p>
                                                         <div className="flex gap-2">
                                                             <Destroy article={article}/>
-                                                            <Link className={'btn-warning uppercase rounded btn btn-sm'}
+                                                            <Link className={'text-orange-300 uppercase'}
                                                                   href={`/session/admin/articles/${article.slug}`}>
                                                                 SHOW
                                                             </Link>
