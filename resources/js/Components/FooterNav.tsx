@@ -8,9 +8,9 @@ export default function NavLink({active = false, className = '', children, ...pr
         <Link
             {...props}
             className={clsx(
-                'relative block px-3 py-2 transition uppercase',
+                'relative block px-3 py-2 transition uppercase ',
                 active
-                    ? 'text-teal-500 dark:text-teal-400'
+                    ? 'text-teal-500 dark:text-teal-400 font-extrabold'
                     : 'hover:text-teal-500 dark:hover:text-teal-400'
             )}
         >
