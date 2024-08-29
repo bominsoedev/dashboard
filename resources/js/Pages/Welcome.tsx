@@ -104,6 +104,7 @@ export default function Welcome({articles}: { articles: any }) {
                         content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
                     />
                 </Head>
+
                 <header className={'relative'}>
                     <div className="relative xl:pt-0 mt-10 xl:mt-2">
                         <div
@@ -114,7 +115,7 @@ export default function Welcome({articles}: { articles: any }) {
                             className="absolute top-0 inset-x-0 h-[37.5rem] bg-grid-slate-900/[0.04] bg-top [mask-image:linear-gradient(0deg,transparent,black)] dark:bg-grid-slate-100/[0.03] dark:bg-[center_top_-1px] top-0 xl:top-8"></div>
                     </div>
                     <div
-                        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-20 sm:mt-24 lg:mt-32 lg:grid lg:gap-8 lg:grid-cols-12 lg:items-center">
+                        className="max-w-[100rem] mx-auto px-4 sm:px-6 md:px-8 mt-20 sm:mt-24 lg:mt-32 lg:grid lg:gap-8 lg:grid-cols-12 lg:items-center">
                         <div className="relative row-start-1 col-start-6 xl:col-start-7 col-span-7 xl:col-span-6">
                             <div className="-mx-4">
                                 <div
@@ -122,9 +123,9 @@ export default function Welcome({articles}: { articles: any }) {
                                     <div className="relative w-full flex flex-col">
                                         <div className="flex-none border-b border-slate-500/30">
                                             <div className="flex items-center h-8 space-x-1.5 px-3">
-                                                <div className="w-2.5 h-2.5 bg-red-600 rounded-full"></div>
-                                                <div className="w-2.5 h-2.5 bg-orange-300/80 rounded-full"></div>
-                                                <div className="w-2.5 h-2.5 bg-green-600 rounded-full"></div>
+                                                <div className="w-3.5 h-3.5 bg-red-600 rounded-full"></div>
+                                                <div className="w-3.5 h-3.5 bg-orange-300/80 rounded-full"></div>
+                                                <div className="w-3.5 h-3.5 bg-green-600 rounded-full"></div>
                                             </div>
                                         </div>
                                         <div className="relative min-h-0 flex-auto flex flex-col">
@@ -133,15 +134,19 @@ export default function Welcome({articles}: { articles: any }) {
                                                 <pre className="flex min-h-full text-sm leading-6">
                                                     <div
                                                         aria-hidden="true"
-                                                        className="hidden md:block text-slate-600 flex-none py-4 pr-4 text-right select-none"
-                                                        style={{width: '40px'}}
+                                                        className="hidden md:block text-slate-600 flex-none py-2 pr-2 text-right select-none"
+                                                        style={{width: '30px'}}
                                                     >
-                                                        {Array.from({length: 26}, (_, i) => (
-                                                            <div key={i}>-</div>
-                                                        ))}
+                                                        {Array.from({length: 26}, (_, i) => {
+                                                            return (
+                                                                <div>
+                                                                    -
+                                                                </div>
+                                                            )
+                                                        })}
                                                     </div>
-                                                    <code
-                                                        className="pt-4 pb-4 px-4 grid grid-cols-2 gap-4">
+                                                    <div
+                                                        className="pt-4 pb-4 px-4 grid grid-cols-1 gap-4">
                                                         <PhotoProvider
                                                             maskOpacity={0.5}
                                                             bannerVisible={true}
@@ -155,14 +160,8 @@ export default function Welcome({articles}: { articles: any }) {
                                                                     className={'hover:cursor-pointer object-cover w-full h-full rounded-xl shadow-lg'}
                                                                     src={'/Profile/profile.jpg'} alt="profile"/>
                                                             </PhotoView>
-                                                            <PhotoView
-                                                                src={'/Profile/profile1.jpg'}>
-                                                                <img
-                                                                    className={'hover:cursor-pointer object-cover w-full h-full rounded-xl shadow-lg'}
-                                                                    src={'/Profile/profile1.jpg'} alt="profile"/>
-                                                            </PhotoView>
                                                         </PhotoProvider>
-                                                     </code>
+                                                     </div>
                                                 </pre>
                                                 </div>
                                             </div>
@@ -171,70 +170,41 @@ export default function Welcome({articles}: { articles: any }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="relative row-start-1 col-start-1 col-span-5 xl:col-span-6 xl:10 lg:mt-10 md:10 mt-28">
+                        <div
+                            className="relative row-start-1 col-start-1 col-span-5 xl:col-span-6 -mt-10">
                             <div
                                 className="h-[24.25rem] max-w-xl mx-auto lg:max-w-none flex items-center justify-center">
                                 <div className="w-full flex-none">
-                                    <div className="-mr-18">
-                                        <div
-                                            className="relative z-10 rounded-lg shadow-xl text-slate-900 mx-auto w-full dark:text-slate-300"
-                                        >
-                                            <div
-                                                className="bg-white rounded-lg overflow-hidden ring-1 ring-slate-900/5 dark:bg-gray-800 dark:highlight-white/5 dark:ring-0 flex p-8"
-                                                style={{transformOrigin: '50% 50% 0px'}}
-                                            >
-                                                <div
-                                                    className="absolute z-20 top-1/2 right-0 xl:right-auto xl:left-0 text-black rounded-full -mt-4 -mr-4 xl:mr-0 xl:-ml-4 pointer-events-none"
-                                                    style={{opacity: 0, transformOrigin: '50% 50% 0px'}}
-                                                >
-                                                    <svg className="h-8 w-8" viewBox="0 0 100 100">
-                                                        <circle
-                                                            cx="50"
-                                                            cy="50"
-                                                            r="40"
-                                                            stroke="rgba(255, 255, 255, 0.5)"
-                                                            strokeWidth="8"
-                                                            fill="rgba(0, 0, 0, 0.5)"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <div
-                                                    className="relative z-10 overflow-hidden flex-none -m-8 mr-8 w-48 h-auto"
-                                                    style={{transformOrigin: '50% 50% 0px', borderRadius: '0%'}}
-                                                >
-                                                    <img
-                                                        src="/Profile/profile1.jpg"
-                                                        decoding="async"
-                                                        alt=""
-                                                        className="absolute max-w-none object-cover bg-slate-100"
-                                                        style={{
-                                                            width: '100%',
-                                                            height: '100%',
-                                                            left: 0,
-                                                            top: 0,
-                                                            transformOrigin: '50% 50% 0px',
-                                                        }}
-                                                    />
-                                                </div>
-                                                <div style={{transformOrigin: '50% 50% 0px'}}>
-                                                    <span
-                                                        className={'inline-block bg-blue/15 bg-gradient-to-r from-white via-white to-[#868686] bg-clip-text text-transparent mt-6 text-base text-zinc-400 dark:text-zinc-300'}>
+                                    <div className="lg:-mr-18">
+                                        <figure
+                                            className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-900 border border-slate-500/30">
+                                            <img
+                                                className="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto bg-zinc-100 object-cover dark:bg-zinc-800"
+                                                src="/Profile/profile1.jpg" alt=""/>
+                                            <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
+                                                <blockquote>
+                                                    <p className="text-lg font-medium">
                                                         I’m [ <span
-                                                        className={'uppercase font-extrabold text-teal-400'}>KYAW ZAY YA</span> ], a travel
+                                                        className={'uppercase font-extrabold text-teal-500 dark:text-teal-400'}>KYAW ZAY YA</span> ],
+                                                        a travel
                                                         and landscape photographer with a deep passion for
-                                                        capturing the world’s natural beauty and cultural richness. For over 15 years, I’ve
-                                                        been exploring the globe, camera in hand, documenting the awe-inspiring landscapes
+                                                        capturing the world’s natural beauty and cultural richness.
+                                                        For over 15 years, I’ve
+                                                        been exploring the globe, camera in hand, documenting the
+                                                        awe-inspiring landscapes
                                                         and vibrant cultures I encounter along the way.
-                                                    </span>
-                                                    <div
-                                                        className="text-sm text-slate-500 dark:text-slate-400"
-                                                        style={{transformOrigin: '50% 50% 0px'}}
-                                                    >
-                                                        Kyaw Zay Ya — Photography, South Korea.
+                                                    </p>
+                                                </blockquote>
+                                                <figcaption className="font-medium">
+                                                    <div className="text-teal-500 dark:text-teal-400">
+                                                        Kyaw Zay Ya
                                                     </div>
-                                                </div>
+                                                    <div className="text-slate-700 dark:text-slate-500">
+                                                        Photography, South Korea.
+                                                    </div>
+                                                </figcaption>
                                             </div>
-                                        </div>
+                                        </figure>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +221,7 @@ export default function Welcome({articles}: { articles: any }) {
                     </div>
                     <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
                         <div className="mt-4 -mx-4 sm:mx-0 col-span-12">
-                        <Photos/>
+                            <Photos/>
                         </div>
                     </div>
                 </div>

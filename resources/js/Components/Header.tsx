@@ -9,23 +9,6 @@ import NavLink from "@/Components/NavLink";
 import {InstagramIcon} from "@/Components/SocialIcons";
 import SocialLink from "@/Components/SocialLink";
 
-interface IconProps {
-    className?: string;
-}
-
-const CloseIcon: React.FC<IconProps> = (props) => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-        <path
-            d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-)
-
 interface MobileNavItemProps {
     href: string;
     children: React.ReactNode;
@@ -43,7 +26,7 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({href, children}) => (
 const MobileNavigation: React.FC = (props) => (
     <Popover {...props}>
         <Popover.Button
-            className="flex items-center text-sm shadow-zinc-800/5 hover:text-primary dark:hover:text-primary  duration-300 backdrop-blur dark:text-zinc-200">
+            className="flex items-center text-sm shadow-zinc-800/5 hover:text-primary dark:hover:text-primary duration-300 backdrop-blur dark:text-zinc-200">
             MENU
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                  stroke="currentColor" className="size-6">
@@ -232,12 +215,12 @@ const Header: React.FC = () => {
         <>
             <div
                 className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] supports-backdrop-blur:bg-white/60 dark:bg-transparent">
-                <div className="max-w-8xl mx-auto"
+                <div className="max-w-8xl"
                      style={{position: 'var(--header-position)'}}
                      ref={headerRef}
                 >
                     <div
-                        className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-6 lg:mx-0">
+                        className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-auto">
                         <div className="relative flex items-center">
                             <Link href="/" className={'mr-3 flex-none w-[3.0625rem] overflow-hidden md:w-auto'}>
                                 <AvatarContainer>
@@ -267,18 +250,6 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            {/*<header*/}
-            {/*    className="pointer-events-none relative z-50 flex flex-none flex-col border-b border-b-slate-700"*/}
-
-            {/*>*/}
-            {/*    <div*/}
-            {/*        */}
-            {/*        className="top-0 z-10 h-16"*/}
-            {/*        */}
-            {/*    >*/}
-
-            {/*    </div>*/}
-            {/*</header>*/}
             {isHomePage && <div style={{height: 'var(--content-offset)'}}/>}
         </>
     )
