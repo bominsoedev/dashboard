@@ -108,16 +108,16 @@ export default function Welcome({articles}: { articles: any }) {
                 <header className={'relative'}>
                     <div className="relative xl:pt-0 mt-10 xl:mt-2">
                         <div
-                            className="hidden dark:block absolute top-0 inset-x-0 h-screen bg-gradient-to-t from-[#0c1120] top-0 xl:top-8"></div>
+                            className="hidden dark:block absolute inset-x-0 h-screen bg-gradient-to-t from-[#0c1120] top-0 xl:top-8"></div>
                         <div
-                            className="absolute top-0 inset-x-0 bg-top bg-no-repeat GridLockup_beams-0___8Vns top-0 xl:top-8"></div>
+                            className="absolute inset-x-0 bg-top bg-no-repeat GridLockup_beams-0___8Vns top-0 xl:top-8"></div>
                         <div
-                            className="absolute top-0 inset-x-0 h-[37.5rem] bg-grid-slate-900/[0.04] bg-top [mask-image:linear-gradient(0deg,transparent,black)] dark:bg-grid-slate-100/[0.03] dark:bg-[center_top_-1px] top-0 xl:top-8"></div>
+                            className="absolute inset-x-0 h-[37.5rem] bg-grid-slate-900/[0.04] bg-top [mask-image:linear-gradient(0deg,transparent,black)] dark:bg-grid-slate-100/[0.03] dark:bg-[center_top_-1px] top-0 xl:top-8"></div>
                     </div>
                     <div
                         className="max-w-[100rem] mx-auto px-4 sm:px-6 md:px-8 mt-20 sm:mt-24 lg:mt-32 lg:grid lg:gap-8 lg:grid-cols-12 lg:items-center">
                         <div className="relative row-start-1 col-start-6 xl:col-start-7 col-span-7 xl:col-span-6">
-                            <div className="-mx-4">
+                            <div className="mx-4 sm:mx-5">
                                 <div
                                     className="relative overflow-hidden shadow-xl rounded-xl flex bg-slate-800 h-[31.625rem] max-h-[60vh] sm:max-h-[none] sm:rounded-xl lg:h-[34.6875rem] xl:h-[31.625rem] dark:bg-slate-900/70 dark:backdrop-blur dark:ring-1 dark:ring-inset dark:ring-white/10 !h-auto max-h-[none]">
                                     <div className="relative w-full flex flex-col">
@@ -196,7 +196,8 @@ export default function Welcome({articles}: { articles: any }) {
                                                     </p>
                                                 </blockquote>
                                                 <figcaption className="font-medium">
-                                                    <div className="text-teal-500 dark:text-teal-400">
+                                                    <div
+                                                        className="text-teal-500 dark:text-teal-400 font-extrabold uppercase">
                                                         Kyaw Zay Ya
                                                     </div>
                                                     <div className="text-slate-700 dark:text-slate-500">

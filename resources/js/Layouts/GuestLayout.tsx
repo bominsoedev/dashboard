@@ -98,9 +98,7 @@ export default function Guest({children}: PropsWithChildren) {
                         )}
                     </div>
                     <div
-                        className={`${(store.getState().themeConfig.sidebar && 'toggle-sidebar') || ''} ${themeConfig.menu} ${themeConfig.layout} ${
-                            themeConfig.rtlClass
-                        } antialiased relative font-nunito font-normal`}
+                        className={`${(store.getState().themeConfig.sidebar && 'toggle-sidebar') || ''} antialiased font-nunito font-normal`}
                     >
                         {children}
                     </div>
