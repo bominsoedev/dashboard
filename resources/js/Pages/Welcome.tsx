@@ -108,9 +108,9 @@ export default function Welcome({articles}: { articles: any }) {
                 <header className={'relative'}>
                     <div className="relative xl:pt-0 mt-10 xl:mt-2">
                         <div
-                            className="hidden dark:block absolute inset-x-0 h-screen bg-gradient-to-t from-[#0c1120] top-0 xl:top-8"></div>
+                            className="hidden dark:block absolute inset-x-0 h-screen bg-gradient-to-t from-bg-slate-900 top-0 xl:top-8"></div>
                         <div
-                            className="absolute inset-x-0 bg-top bg-no-repeat GridLockup_beams-0___8Vns top-0 xl:top-8"></div>
+                            className="absolute inset-x-0 bg-top bg-no-repeat GridLockup_beams-0___8Vns top-0"></div>
                         <div
                             className="absolute inset-x-0 h-[37.5rem] bg-grid-slate-900/[0.04] bg-top [mask-image:linear-gradient(0deg,transparent,black)] dark:bg-grid-slate-100/[0.03] dark:bg-[center_top_-1px] top-0 xl:top-8"></div>
                     </div>
@@ -214,7 +214,7 @@ export default function Welcome({articles}: { articles: any }) {
                 </header>
                 <div className="relative py-32 mt-32 ">
                     <div
-                        className="hidden dark:block absolute top-0 inset-x-0 h-screen bg-gradient-to-t from-[#0c1120] top-0 xl:top-8">
+                        className="hidden dark:block absolute top-0 inset-x-0 h-screen bg-gradient-to-t from-bg-slate-900 top-0 xl:top-8">
                         <div
                             className="absolute top-0 inset-x-0 bg-top bg-no-repeat GridLockup_beams-1__X8ShE top-0 xl:top-8"></div>
                         <div
