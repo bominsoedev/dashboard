@@ -22,7 +22,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'articles' => Article::all()
+        'articles' => Article::orderBy('id', 'desc')->take(6)->get(),
     ]);
 })->name('welcome');
 Route::get('article_list', fn() => Inertia::render('ArticleList', [
@@ -30,9 +30,8 @@ Route::get('article_list', fn() => Inertia::render('ArticleList', [
 ]))->name('articles.article_list');
 
 Route::get('portfolio', function (Request $request) {
-    $slug = $request->input('tag', []);
     return Inertia::render('Portfolio', array(
-        'photos' => Photo::with(['portfolio', 'tags'])
+        'photos' => Photo::orderBy('id','desc')->with(['portfolio', 'tags'])
             ->filter(request(['tag']))
             ->paginate(50),
         'tags' => Tag::all()
@@ -47,15 +46,12 @@ Route::get('/uses', function () {
         ->join('tools_sections', 'tools.tools_section_id', '=', 'tools_sections.id')
         ->get()
         ->groupBy('tools_section_id')
-        ->map(function ($items, $tools_section_id) {
-            return [
-                'sectionId' => $tools_section_id,
-                'sectionName' => $items->first()->name,
-                'items' => $items->map(function ($item) {
-                    return $item;
-                })->toArray(),
-            ];
-        })->values();
+        ->map(fn($items) => [
+            'sectionId' => $items->first()->tools_section_id,
+            'sectionName' => $items->first()->name,
+            'items' => $items->toArray(),
+        ])->values();
+
     return Inertia::render('Uses', [
         'tools' => $grouped
     ]);

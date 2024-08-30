@@ -80,7 +80,7 @@ export default function Guest({children}: PropsWithChildren) {
                     </div>
                 </div>
             </div>
-            <div className={'relative'}>
+            <div className={'relative w-full max-w-8xl'}>
                 <Header/>
                 <main>
                     <div className='fixed bottom-6 right-10 z-50'>

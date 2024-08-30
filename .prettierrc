@@ -1,0 +1,12 @@
+{
+    "tailwindFunctions": [
+        "clsx"
+    ],
+    "tailwindPreserveWhitespace": true,
+    "tailwindPreserveDuplicates": true,
+    "plugins": [
+        "prettier-plugin-svelte",
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ]
+}
