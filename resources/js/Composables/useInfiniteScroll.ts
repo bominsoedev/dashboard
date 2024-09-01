@@ -1,51 +1,63 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useIntersect } from '@/Composables/useIntersect';
-import { usePage } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { usePage, router } from '@inertiajs/react';
 
 interface InfiniteScrollOptions {
     rootMargin?: string;
 }
 
-export function useInfiniteScroll<T>(propName: string, landmarkRef: React.RefObject<HTMLElement> | null = null, options: InfiniteScrollOptions = {}) {
-    const { props, url: initialUrl } = usePage<{ [key: string]: { data: T[]; next_page_url: string | null } }>();
-
-    const value = useCallback(() => props[propName], [props, propName]);
-
-    const [items, setItems] = useState<T[]>(value().data);
-    const [canLoadMoreItems, setCanLoadMoreItems] = useState<boolean>(value().next_page_url !== null);
+export function useInfiniteScroll<T>(
+    initialData: T[],
+    initialNextPageUrl: string | null,
+    propName: string,
+    options: InfiniteScrollOptions = {}
+) {
+    const [items, setItems] = useState<T[]>(initialData);
+    const [nextPageUrl, setNextPageUrl] = useState<string | null>(initialNextPageUrl);
+    const initialUrl = usePage().url;
+    const landmarkRef = useRef<HTMLDivElement>(null);
 
     const loadMoreItems = useCallback(() => {
-        if (!canLoadMoreItems) {
+        if (!nextPageUrl) {
             return;
         }
 
-        Inertia.get(value().next_page_url as string, {}, {
+        router.get(nextPageUrl, {}, {
             preserveState: true,
             preserveScroll: true,
             onSuccess: (page) => {
-                const newItems = (page.props as any)[propName].data;
-                setItems((prevItems) => [...prevItems, ...newItems]);
-                setCanLoadMoreItems((page.props as any)[propName].next_page_url !== null);
+                const newItems = (page.props as any)[propName];
+                setItems((prevItems) => [...prevItems, ...newItems.data]);
+                setNextPageUrl(newItems.next_page_url);
                 window.history.replaceState({}, '', initialUrl);
-            },
+            }
         });
-    }, [canLoadMoreItems, initialUrl, propName, value]);
+    }, [nextPageUrl, propName, initialUrl]);
 
     useEffect(() => {
-        if (landmarkRef && landmarkRef.current) {
-            useIntersect(landmarkRef, loadMoreItems, options);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        loadMoreItems();
+                    }
+                });
+            },
+            {
+                rootMargin: options.rootMargin || '0px 0px 150px 0px',
+            }
+        );
+
+        const currentLandmark = landmarkRef.current;
+        if (currentLandmark) {
+            observer.observe(currentLandmark);
         }
-    }, [landmarkRef, loadMoreItems, options]);
 
-    const reset = () => {
-        setItems(value().data);
-    };
+        return () => {
+            if (currentLandmark) {
+                observer.unobserve(currentLandmark);
+            }
+        };
+    }, [loadMoreItems, options.rootMargin]);
 
-    return {
-        items,
-        loadMoreItems,
-        reset,
-        canLoadMoreItems,
-    };
+    return { items, landmarkRef, loadMoreItems };
 }
