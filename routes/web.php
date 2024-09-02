@@ -31,7 +31,7 @@ Route::get('article_list', fn() => Inertia::render('ArticleList', [
 
 Route::get('portfolio', function (Request $request) {
     return Inertia::render('Portfolio', array(
-        'photos' => Photo::orderBy('id','desc')->with(['portfolio', 'tags'])
+        'photos' => Photo::orderBy('id', 'desc')->with(['portfolio', 'tags'])
             ->filter(request(['tag']))
             ->paginate(50),
         'tags' => Tag::all()
@@ -82,6 +82,12 @@ Route::middleware(['auth'])->prefix('session/admin/')->group(function () {
         $category_currentMonthCount = Categories::where('created_at', '>=', $startOfMonth)->count();
         $category_lastMonthCount = Categories::whereBetween('created_at',
             [$startOfLastMonth, $endOfLastMonth])->count();
+        $tag_currentMonthCount = Tag::where('created_at', '>=', $startOfMonth)->count();
+        $tag_lastMonthCount = Tag::whereBetween('created_at',
+            [$startOfLastMonth, $endOfLastMonth])->count();
+        $portfolio_currentMonthCount = Portfolio::where('created_at', '>=', $startOfMonth)->count();
+        $portfolio_lastMonthCount = Portfolio::whereBetween('created_at',
+            [$startOfLastMonth, $endOfLastMonth])->count();
 
 
         // Calculate percentage differences
@@ -97,36 +103,56 @@ Route::middleware(['auth'])->prefix('session/admin/')->group(function () {
         $categoryDiff = $category_lastMonthCount > 0
             ? (($category_currentMonthCount - $category_lastMonthCount) / $category_lastMonthCount) * 100
             : 100;
+        $tagDiff = $tag_lastMonthCount > 0
+            ? (($tag_currentMonthCount - $tag_lastMonthCount) / $tag_lastMonthCount) * 100
+            : 100;
+        $portfolioDiff = $portfolio_lastMonthCount > 0
+            ? (($portfolio_currentMonthCount - $portfolio_lastMonthCount) / $portfolio_lastMonthCount) * 100
+            : 100;
 
         // Create the response structure
         $data = [
             [
-                'title' => 'Article',
+                'title' => 'Articles',
                 'icon' => 'receipt', // Replace with actual icon logic
                 'total' => $tools_lastMonthCount,
                 'value' => $article_currentMonthCount,
                 'diff' => $articleDiff,
             ],
             [
-                'title' => 'Tool',
+                'title' => 'Tools',
                 'icon' => 'receipt', // Replace with actual icon logic
                 'total' => $tools_lastMonthCount,
                 'value' => $tools_currentMonthCount,
                 'diff' => $toolDiff,
             ],
             [
-                'title' => 'Category',
+                'title' => 'Categories',
                 'icon' => 'receipt', // Replace with actual icon logic
                 'total' => $category_lastMonthCount,
                 'value' => $category_currentMonthCount,
                 'diff' => $categoryDiff,
             ],
             [
-                'title' => 'Section',
+                'title' => 'Sections',
                 'icon' => 'receipt', // Replace with actual icon logic
                 'total' => $section_lastMonthCount,
                 'value' => $section_currentMonthCount,
                 'diff' => $sectionDiff,
+            ],
+            [
+                'title' => 'Tags',
+                'icon' => 'receipt', // Replace with actual icon logic
+                'total' => $tag_lastMonthCount,
+                'value' => $portfolio_currentMonthCount,
+                'diff' => $tagDiff,
+            ],
+            [
+                'title' => 'Photos',
+                'icon' => 'receipt', // Replace with actual icon logic
+                'total' => $portfolio_lastMonthCount,
+                'value' => $portfolio_currentMonthCount,
+                'diff' => $portfolioDiff,
             ],
         ];
         return Inertia::render('Dashboard', [
